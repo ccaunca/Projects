@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SpaceInvaders.ImageManager">
+    <Position X="1" Y="3.25" Width="1.5" />
+    <Members>
+      <Method Name="GetInstance" Hidden="true" />
+      <Method Name="ImageManager" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAEAgAAABAAIAEAAEABCAAAAAAA=</HashCode>
+      <FileName>Managers\ImageManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvaders.Image">
+    <Position X="3.5" Y="2.25" Width="1.5" />
+    <Members>
+      <Method Name="Image" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACBAAAIAAAgAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Image.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pTexture" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpaceInvaders.DLink">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="Clear" Hidden="true" />
+      <Method Name="DLink" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAACAAAAAAAAAAAACAAAABAAAA=</HashCode>
+      <FileName>Base\DLink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvaders.Manager">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="CheckReserve" Hidden="true" />
+      <Method Name="FillReserve" Hidden="true" />
+      <Method Name="Manager" Hidden="true" />
+      <Field Name="mNumActive" Hidden="true" />
+      <Field Name="mNumDeltaGrow" Hidden="true" />
+      <Field Name="mNumReserve" Hidden="true" />
+      <Field Name="mNumTotalNodes" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>nAAAAAAAAAACAAAAAAFAoAAAAAgAAACgUQBAAAAAAAA=</HashCode>
+      <FileName>Base\Manager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pReserve" />
+      <Field Name="pActive" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpaceInvaders.Texture" HideInheritanceLine="true">
+    <Position X="6" Y="2.25" Width="1.5" />
+    <Members>
+      <Method Name="Texture" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQADAAAAAAAgAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Texture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

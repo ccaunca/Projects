@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SpaceInvaders.Manager">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="BaseInsertSorted" Hidden="true" />
+      <Method Name="CheckReserve" Hidden="true" />
+      <Method Name="FillReserve" Hidden="true" />
+      <Method Name="Manager" Hidden="true" />
+      <Field Name="mNumActive" Hidden="true" />
+      <Field Name="mNumDeltaGrow" Hidden="true" />
+      <Field Name="mNumReserve" Hidden="true" />
+      <Field Name="mNumTotalNodes" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>nAAAAAAAAAACAAAAAAFAoAAAAAgAAACgUQBAAAAAAAA=</HashCode>
+      <FileName>Base\Manager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pActive" />
+      <Field Name="pReserve" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpaceInvaders.DLink">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="Clear" Hidden="true" />
+      <Method Name="DLink" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAACAAAAAAAAAAAACAAAABAAAA=</HashCode>
+      <FileName>Base\DLink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="SpaceInvaders.DLinkStatus">
+    <Position X="3" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAgAAACAAAAAAA=</HashCode>
+      <FileName>Base\DLink.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

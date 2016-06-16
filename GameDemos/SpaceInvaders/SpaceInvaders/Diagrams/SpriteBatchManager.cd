@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SpaceInvaders.Sprite" Collapsed="true">
+    <Position X="2.25" Y="3.75" Width="1.5" />
+    <Members>
+      <Method Name="~Sprite" Hidden="true" />
+      <Method Name="Render" Hidden="true" />
+      <Method Name="Set" Hidden="true" />
+      <Method Name="Sprite" Hidden="true" />
+      <Method Name="Update" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ggQAAAAAAAAAJABAQAgIAAAAAAAEAAAAABhgAABAAIA=</HashCode>
+      <FileName>Sprite\Sprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvaders.SpriteBase" Collapsed="true">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <Members>
+      <Method Name="~SpriteBase" Hidden="true" />
+      <Method Name="SpriteBase" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAABAAAAAAAAAAAAAAAAAAgAAAAAAABAAAAAAACA=</HashCode>
+      <FileName>Sprite\SpriteBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvaders.SpriteBatch">
+    <Position X="6" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAEABAAAAIAEAAAAEABAAAAAAAA=</HashCode>
+      <FileName>Sprite\SpriteBatch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvaders.SpriteBatchManager">
+    <Position X="2.25" Y="1.25" Width="1.75" />
+    <Members>
+      <Method Name="Compare" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Method Name="CreateNode" Hidden="true" />
+      <Method Name="Dump" Hidden="true" />
+      <Method Name="DumpNode" Hidden="true" />
+      <Method Name="Find" Hidden="true" />
+      <Method Name="GetInstance" Hidden="true" />
+      <Field Name="pInstance" Hidden="true" />
+      <Method Name="SpriteBatchManager" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAgAAAAEAhAAABAAIAEAAEABCAAAAAAA=</HashCode>
+      <FileName>Managers\SpriteBatchManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvaders.SpriteBatchNode">
+    <Position X="8.25" Y="3.25" Width="1.5" />
+    <Members>
+      <Field Name="pSpriteBase" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAABAAAAACAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Sprite\SpriteBatchNode.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pSpriteBase" />
+      <Field Name="pSpriteBatch" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpaceInvaders.SpriteBox" Collapsed="true">
+    <Position X="4.25" Y="3.75" Width="1.5" />
+    <Members>
+      <Method Name="~SpriteBox" Hidden="true" />
+      <Method Name="Render" Hidden="true" />
+      <Method Name="Set" Hidden="true" />
+      <Method Name="SpriteBox" Hidden="true" />
+      <Method Name="Update" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>gAQAAAAAAAAABABAQAAIAAAABAAEAAAAABBgAABAIAA=</HashCode>
+      <FileName>Sprite\SpriteBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvaders.Manager" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.75" />
+    <Members>
+      <Method Name="BaseAdd" Hidden="true" />
+      <Method Name="BaseDump" Hidden="true" />
+      <Method Name="BaseFind" Hidden="true" />
+      <Method Name="BaseInsertSorted" Hidden="true" />
+      <Method Name="BaseRemove" Hidden="true" />
+      <Method Name="CheckReserve" Hidden="true" />
+      <Method Name="Compare" Hidden="true" />
+      <Method Name="CreateNode" Hidden="true" />
+      <Method Name="DumpNode" Hidden="true" />
+      <Method Name="FillReserve" Hidden="true" />
+      <Method Name="Manager" Hidden="true" />
+      <Field Name="mNumActive" Hidden="true" />
+      <Field Name="mNumDeltaGrow" Hidden="true" />
+      <Field Name="mNumReserve" Hidden="true" />
+      <Field Name="mNumTotalNodes" Hidden="true" />
+    </Members>
+    <AssociationLine Name="pReserve" Type="SpaceInvaders.DLink">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.185" Y="0.252" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="pActive" Type="SpaceInvaders.DLink">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.302" Y="-0.457" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>nAAAAAAAAAACAAAAABFAoAIAAAgAAACgUQBAAAAAAAA=</HashCode>
+      <FileName>Base\Manager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pReserve" />
+      <Field Name="pActive" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpaceInvaders.DLink" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAACAAAAAAAAAAAACAAAABAAAA=</HashCode>
+      <FileName>Base\DLink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvaders.CLink" Collapsed="true">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Base\CLink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvaders.Container" Collapsed="true">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <AssociationLine Name="pReserve" Type="SpaceInvaders.CLink">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.135" Y="0.185" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="pActive" Type="SpaceInvaders.CLink">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.11" Y="-0.332" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>mAAAAAAAAAACAAAAAAFAoAAAAAgAAACgUQBAAAAAAAA=</HashCode>
+      <FileName>Base\Container.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pReserve" />
+      <Field Name="pActive" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SpaceInvaders.TimerManager">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <Members>
+      <Method Name="Add" Hidden="true" />
+      <Method Name="Compare" Hidden="true" />
+      <Method Name="Create" Hidden="true" />
+      <Method Name="CreateNode" Hidden="true" />
+      <Method Name="Dump" Hidden="true" />
+      <Method Name="DumpNode" Hidden="true" />
+      <Method Name="Find" Hidden="true" />
+      <Method Name="GetCurrentTime" Hidden="true" />
+      <Method Name="GetInstance" Hidden="true" />
+      <Field Name="pInstance" Hidden="true" />
+      <Method Name="Remove" Hidden="true" />
+      <Method Name="TimerManager" Hidden="true" />
+      <Method Name="Update" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAAAAAAEAhAAABAAIAEKAEABCAAAAAAA=</HashCode>
+      <FileName>Managers\TimerManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvaders.Command">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Command.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvaders.TimerEvent">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <Members>
+      <Method Name="~TimerEvent" Hidden="true" />
+      <Field Name="name" Hidden="true" />
+      <Method Name="TimerEvent" Hidden="true" />
+    </Members>
+    <AssociationLine Name="command" Type="SpaceInvaders.Command" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.5" Y="1.809" />
+        <Point X="4.74" Y="1.809" />
+        <Point X="4.74" Y="1.125" />
+        <Point X="5" Y="1.125" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.36" Y="-0.232" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEABAAAAgAAAAAAAAQEAAAAAAAAAAAABAA=</HashCode>
+      <FileName>TimerEvent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="command" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpaceInvaders.ImageHolder" Collapsed="true">
+    <Position X="6.5" Y="4" Width="1.5" />
+    <Members>
+      <Method Name="ImageHolder" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ImageHolder.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pImage" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpaceInvaders.AnimationSprite">
+    <Position X="5" Y="2.25" Width="1.5" />
+    <Members>
+      <Method Name="AnimationSprite" Hidden="true" />
+      <Method Name="Dump" Hidden="true" />
+    </Members>
+    <AssociationLine Name="pCurrImage" Type="SpaceInvaders.SLink" FixedFromPoint="true">
+      <Path>
+        <Point X="6.5" Y="3" />
+        <Point X="7.5" Y="3" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="pSprite" Type="SpaceInvaders.Sprite" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="2.75" />
+        <Point X="6.875" Y="2.75" />
+        <Point X="6.875" Y="1.897" />
+        <Point X="7.5" Y="1.897" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEEgAgAAIAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>AnimationSprite.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pCurrImage" />
+      <Field Name="pFirstImage" />
+      <Field Name="pSprite" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpaceInvaders.Manager">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="BaseAdd" Hidden="true" />
+      <Method Name="BaseDump" Hidden="true" />
+      <Method Name="BaseFind" Hidden="true" />
+      <Method Name="BaseRemove" Hidden="true" />
+      <Method Name="CheckReserve" Hidden="true" />
+      <Method Name="Compare" Hidden="true" />
+      <Method Name="CreateNode" Hidden="true" />
+      <Method Name="DumpNode" Hidden="true" />
+      <Method Name="FillReserve" Hidden="true" />
+      <Method Name="Manager" Hidden="true" />
+      <Field Name="mNumActive" Hidden="true" />
+      <Field Name="mNumDeltaGrow" Hidden="true" />
+      <Field Name="mNumReserve" Hidden="true" />
+      <Field Name="mNumTotalNodes" Hidden="true" />
+    </Members>
+    <AssociationLine Name="pActive" Type="SpaceInvaders.DLink">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.21" Y="-0.257" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>nAAAAAAAAAACAAAAAAFAoAAAAAgAAACgUQBAAAAAAAA=</HashCode>
+      <FileName>Base\Manager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pActive" />
+      <Field Name="pReserve" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpaceInvaders.SLink">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>SLink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvaders.Image" Collapsed="true" HideInheritanceLine="true">
+    <Position X="8.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACBAAAIAAAgAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Image.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvaders.DLink" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAACAAAAAAAAAAAACAAAABAAAA=</HashCode>
+      <FileName>Base\DLink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvaders.Sprite" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAJAAAQAgIAAAAAAAAAAAAABhgAAAAAIA=</HashCode>
+      <FileName>Sprite\Sprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

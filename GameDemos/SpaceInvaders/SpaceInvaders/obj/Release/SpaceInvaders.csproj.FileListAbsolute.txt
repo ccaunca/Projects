@@ -1,0 +1,16 @@
+C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\bin\Release\SpaceInvaders.exe.config
+C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\bin\Release\SpaceInvaders.exe.manifest
+C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\bin\Release\SpaceInvaders.application
+C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\bin\Release\SpaceInvaders.exe
+C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\bin\Release\SpaceInvaders.pdb
+C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\bin\Release\AzulCoreCLRDebug.dll
+C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\bin\Release\irrKlang.NET4.dll
+C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\bin\Release\AzulCoreCLRDebug.pdb
+C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.csprojResolveAssemblyReference.cache
+C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.exe.manifest
+C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.application
+C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.exe
+C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.pdb
+C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\bin\Release\SpaceInvaders.exe.config
+C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.exe
+C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.pdb
