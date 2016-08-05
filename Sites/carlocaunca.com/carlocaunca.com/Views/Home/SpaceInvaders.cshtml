@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "SpaceInvaders";
+}
+
+<h2 align="Center">Space Invaders</h2>
+<div align="center">
+    <a href="http://carlocaunca.com/SpaceInvaders/setup.exe">
+        <img onmouseover="orangeImg(this)" onmouseout="whiteImg(this)" src="/Images/SpaceInvaders.jpg">
+    </a>
+</div>
+<div>
+    <h3 align="Center">Instructions</h3>
+    <ol>
+        <li>Click on the Space Invaders image above.</li>
+        <li>Save setup.exe to your PC.</li>
+        <li>Run setup.exe and go through the InstallShield Wizard.</li>
+        <li>Click on "Carlo Caunca's SpaceInvaders Demo" shortcut on your Desktop.</li>
+    </ol>
+</div>
+<script>
+    function orangeImg(img)
+    {
+        img.src = "/Images/SpaceInvadersOrange.jpg";
+    }
+    function whiteImg(img)
+    {
+        img.src = "/Images/SpaceInvaders.jpg";
+    }
+</script>
