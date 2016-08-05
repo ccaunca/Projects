@@ -11,16 +11,3 @@ C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\fina
 C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\bin\Debug\SpaceInvaders.application
 C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\obj\Debug\SpaceInvaders.exe.manifest
 C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\obj\Debug\SpaceInvaders.application
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\bin\Debug\SpaceInvaders.exe.config
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\bin\Debug\SpaceInvaders.exe.manifest
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\bin\Debug\SpaceInvaders.application
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\bin\Debug\SpaceInvaders.exe
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\bin\Debug\SpaceInvaders.pdb
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\bin\Debug\AzulCoreCLRDebug.dll
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\bin\Debug\irrKlang.NET4.dll
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\bin\Debug\AzulCoreCLRDebug.pdb
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\obj\Debug\SpaceInvaders.csprojResolveAssemblyReference.cache
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\obj\Debug\SpaceInvaders.exe.manifest
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\obj\Debug\SpaceInvaders.application
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\obj\Debug\SpaceInvaders.exe
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\obj\Debug\SpaceInvaders.pdb

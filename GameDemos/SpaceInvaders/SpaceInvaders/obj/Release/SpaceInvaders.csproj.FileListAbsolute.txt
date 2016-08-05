@@ -11,10 +11,3 @@ C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\fina
 C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.application
 C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.exe
 C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.pdb
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\bin\Release\AzulCoreCLRDebug.dll
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\bin\Release\irrKlang.NET4.dll
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\bin\Release\AzulCoreCLRDebug.pdb
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.exe.manifest
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.application
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.exe
-C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.pdb

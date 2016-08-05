@@ -7,19 +7,16 @@
   </PropertyGroup>
   <PropertyGroup>
     <PublishUrlHistory>ftp://184.168.193.49/|publish\</PublishUrlHistory>
-    <InstallUrlHistory>http://localhost/SpaceInvaders/</InstallUrlHistory>
+    <InstallUrlHistory>http://carlocaunca.com/Home/SpaceInvaders/|https://carlocaunca.wordpress.com/|http://localhost/SpaceInvaders/</InstallUrlHistory>
     <SupportUrlHistory />
     <UpdateUrlHistory />
     <BootstrapperUrlHistory />
     <ErrorReportUrlHistory />
     <FallbackCulture>en-US</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <StartWorkingDirectory>..\..\Resources\</StartWorkingDirectory>
-  </PropertyGroup>
-  <PropertyGroup>
-    <EnableSecurityDebugging>false</EnableSecurityDebugging>
   </PropertyGroup>
 </Project>

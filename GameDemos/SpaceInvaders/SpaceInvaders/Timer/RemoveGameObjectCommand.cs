@@ -9,7 +9,6 @@ namespace SpaceInvaders
         public RemoveGameObjectCommand(GameObject go)
         {
             this.pGameObject = go;
-            Debug.WriteLine("Removing {0}", this.pGameObject.gameObjectName);
         }
         public override void execute(float currentTime)
         {

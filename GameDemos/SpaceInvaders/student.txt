@@ -1,0 +1,5 @@
+This is a test file
+   Each student has access to their own student directory
+   This directory has read/write access
+   This directory is private to everyone, except for individual student and the professor
+
