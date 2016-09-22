@@ -11,3 +11,6 @@ C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\fina
 C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.application
 C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.exe
 C:\Users\Aven\Perforce\ccaunca_SE456\keenan2016winter_se456\student\ccaunca\finalSpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.pdb
+C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\bin\Release\SpaceInvaders.exe.config
+C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.exe
+C:\GitHub\GameDemos\SpaceInvaders\SpaceInvaders\obj\Release\SpaceInvaders.pdb

@@ -187,6 +187,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\gmail.ico" />
+    <Content Include="Images\linkedin.ico" />
+    <Content Include="Images\SpaceInvaders.jpg" />
+    <Content Include="Images\SpaceInvadersOrange.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="FallDown.unity3d" />
@@ -223,7 +227,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
     <Folder Include="Views\Manage\" />
   </ItemGroup>
   <ItemGroup>

@@ -32,5 +32,10 @@ namespace carlocaunca.com.Controllers
         {
             return Redirect("https://carlocaunca.wordpress.com/");
         }
+
+        public ActionResult GitHub()
+        {
+            return Redirect("https://github.com/ccaunca/Projects/tree/master/GameDemos");
+        }
     }
 }
