@@ -14,6 +14,8 @@ namespace FallDownDemo
 			Physics2D.gravity = new Vector2(0, GetDirection());
             leftPlank = GameObject.Find("LeftPlank");
             rightPlank = GameObject.Find("RightPlank");
+            // initialize DB
+
 		}
 	
 		int GetDirection()
