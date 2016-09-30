@@ -52,6 +52,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -181,16 +183,32 @@
       <DependentUpon>LogUserScore.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\FallDownModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FallDownModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FallDownModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FallDownModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FallDownModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FallDownModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HighScore.cs">
+      <DependentUpon>FallDownModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AddScore.php" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Display.php" />
     <Content Include="FallDown.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -201,9 +219,26 @@
     <Content Include="Images\SpaceInvaders.jpg" />
     <Content Include="Images\SpaceInvadersOrange.jpg" />
     <Content Include="LogUserScore.aspx" />
+    <Content Include="Models\FallDownModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FallDownModel.edmx</DependentUpon>
+      <LastGenOutput>FallDownModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\FallDownModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FallDownModel.edmx</DependentUpon>
+      <LastGenOutput>FallDownModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="FallDown.unity3d" />
+    <EntityDeploy Include="Models\FallDownModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FallDownModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\FallDownModel.edmx.diagram">
+      <DependentUpon>FallDownModel.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\GoDaddy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -246,6 +281,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

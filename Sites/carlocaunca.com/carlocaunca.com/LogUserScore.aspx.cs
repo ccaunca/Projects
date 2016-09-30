@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using carlocaunca.com.Models;
 
 namespace carlocaunca.com
 {
@@ -16,6 +17,17 @@ namespace carlocaunca.com
                 string initials = (Request.Form["Initials"]);
                 string score = (Request.Form["Score"]);
                 
+                using (var db = new FallDownContext())
+                {
+                    HighScore highScore = new HighScore
+                    {
+                        Name = "ZZZ",
+                        Score = Convert.ToInt32("23"),
+                        InsertDatetime = DateTime.Now
+                    };
+                    db.HighScores.Add(highScore);
+                    db.SaveChanges();
+                }
                 Response.Clear();
                 Response.ContentType = "application/text; charset=utf-8";
                 Response.Write("Total Score: 200");

@@ -123,11 +123,11 @@ namespace FallDownDemo
             //GUI.Label(new Rect(leftMarginRank, topMargin, buttonWidth, titleHeight), rankTitle, guiTopScoresStyle);
             //GUI.Label(new Rect(leftMarginScore, topMargin, buttonWidth, titleHeight), scoreTitle, guiTopScoresStyle);
             //GUI.Label(new Rect(leftMarginInitials, topMargin, buttonWidth, titleHeight), initialsTitle, guiTopScoresStyle);
-            //string initials = "XXX";
-            //int score = 999;
-            //Messenger messenger = new Messenger(customUrl);
-            //Message message = new Message(new List<Field>{new Field("Score", score.ToString()),new Field("Initials", initials)});
-            //messenger.SendMessage(message);
+            string initials = "XXX";
+            int score = 999;
+            Messenger messenger = new Messenger(customUrl);
+            Message message = new Message(new List<Field> { new Field("Score", score.ToString()), new Field("Initials", initials) });
+            messenger.SendMessage(message);
             // Display top maxScores
             for (int i = 1; i <= maxScores; i++)
             {
