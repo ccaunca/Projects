@@ -72,23 +72,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\BallController.cs" />
-    <Compile Include="Assets\Scripts\CameraManager.cs" />
-    <Compile Include="Assets\Scripts\CubeCollider.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\GameObjectHelper.cs" />
-    <Compile Include="Assets\Scripts\GameOverPlankCollider.cs" />
-    <Compile Include="Assets\Scripts\GameOverPrompt.cs" />
-    <Compile Include="Assets\Scripts\GameOverTrigger.cs" />
-    <Compile Include="Assets\Scripts\GameScoreGUI.cs" />
-    <Compile Include="Assets\Scripts\HSController.cs" />
-    <Compile Include="Assets\Scripts\HighScore.cs" />
-    <Compile Include="Assets\Scripts\LevelEnum.cs" />
-    <Compile Include="Assets\Scripts\MainMenuGUI.cs" />
-    <Compile Include="Assets\Scripts\Plank.cs" />
-    <Compile Include="Assets\Scripts\PlankGenerator.cs" />
-    <Compile Include="Assets\Scripts\SidePlank.cs" />
-    <Compile Include="Assets\Scripts\WWWFormScore.cs" />
+    <Compile Include="Assets\Scripts\Classes\CameraManager.cs" />
+    <Compile Include="Assets\Scripts\Classes\DatabaseConnection.cs" />
+    <Compile Include="Assets\Scripts\Classes\Field.cs" />
+    <Compile Include="Assets\Scripts\Classes\GameObjectHelper.cs" />
+    <Compile Include="Assets\Scripts\Classes\HighScore.cs" />
+    <Compile Include="Assets\Scripts\Classes\LevelEnum.cs" />
+    <Compile Include="Assets\Scripts\Classes\Message.cs" />
+    <Compile Include="Assets\Scripts\Classes\Messenger.cs" />
+    <Compile Include="Assets\Scripts\Classes\ScoreManager.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\BallController.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\CubeCollider.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\GameManager.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\GameOverPlankCollider.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\GameOverPrompt.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\GameOverTrigger.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\GameScoreGUI.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\MainMenuGUI.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\Plank.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\PlankGenerator.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\SidePlank.cs" />
     <Compile Include="Assets\TestScene.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

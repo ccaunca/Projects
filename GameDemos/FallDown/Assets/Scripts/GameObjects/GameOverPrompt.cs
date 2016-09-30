@@ -188,7 +188,6 @@ namespace FallDownDemo
 		
 		private void GetAllHighScores()
 		{
-            StartCoroutine(GetScores());
             for (int j = 1; j <= maxScores; j++)
 			{
 				string hskText = GetHighScoreKeyText(j);

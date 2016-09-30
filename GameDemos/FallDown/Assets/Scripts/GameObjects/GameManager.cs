@@ -6,17 +6,18 @@ namespace FallDownDemo
 	public class GameManager : MonoBehaviour {
 		private bool isDown = true;
         private CameraManager cameraManager;
+        private ScoreManager scoreManager;
         private GameObject leftPlank;
         private GameObject rightPlank;
 		// Use this for initialization
 		void Start () {
-            cameraManager = CameraManager.GetInstance();
 			Physics2D.gravity = new Vector2(0, GetDirection());
             leftPlank = GameObject.Find("LeftPlank");
             rightPlank = GameObject.Find("RightPlank");
-            // initialize DB
-
-		}
+            // initialize managers
+            cameraManager = CameraManager.GetInstance();
+            scoreManager = ScoreManager.GetInstance();
+        }
 	
 		int GetDirection()
 		{
