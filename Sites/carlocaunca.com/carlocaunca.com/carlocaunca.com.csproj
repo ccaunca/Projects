@@ -173,6 +173,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LogUserScore.aspx.cs">
+      <DependentUpon>LogUserScore.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LogUserScore.aspx.designer.cs">
+      <DependentUpon>LogUserScore.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -193,6 +200,7 @@
     <Content Include="Images\linkedin.ico" />
     <Content Include="Images\SpaceInvaders.jpg" />
     <Content Include="Images\SpaceInvadersOrange.jpg" />
+    <Content Include="LogUserScore.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="FallDown.unity3d" />
