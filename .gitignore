@@ -45,3 +45,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+/Applications/Budget/Budget/obj/Debug
+/Applications/Budget/Budget/bin/Debug
+/Applications/Budget/Budget.Models/obj/Debug
+/Applications/Budget/Budget.Models/bin/Debug

@@ -1,17 +1,10 @@
-﻿using Budget.Base;
-using Budget.Enum;
+﻿using Budget.Enum;
 using Budget.Helpers;
-using Budget.UserControls;
 using ReactiveUI;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Reactive;
-using System.Reactive.Linq;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace Budget.ViewModels
 {
@@ -53,21 +46,18 @@ namespace Budget.ViewModels
             get { return _mode; }
             set { this.RaiseAndSetIfChanged(ref _mode, value); }
         }
-        private ObservableCollection<TabItem> _tabs;
-        public ObservableCollection<TabItem> Tabs
+        private int _selectedTabIndex;
+        public int SelectedTabIndex
         {
-            get { return _tabs; }
-            set { this.RaiseAndSetIfChanged(ref _tabs, value); }
+            get { return _selectedTabIndex; }
+            set { this.RaiseAndSetIfChanged(ref _selectedTabIndex, value); }
         }
 
         public MainWindowViewModel()
         {
             IsViewMode = true;
+            SelectedTabIndex = 0;
             SelectionMode = CalendarSelectionMode.SingleRange;
-            Tabs = new ObservableCollection<TabItem>();
-            Tabs.Add(new TabItem { Header = CalendarModeEnum.View, Content = new ViewUserControl(), IsSelected = IsViewMode, IsEnabled = false });
-            Tabs.Add(new TabItem { Header = CalendarModeEnum.Add, Content = new AddUserControl(), IsSelected = IsAddMode, IsEnabled = false });
-            Tabs.Add(new TabItem { Header = CalendarModeEnum.Edit, Content = new EditUserControl(), IsSelected = IsEditMode, IsEnabled = false });
             IObservable<bool> viewMode = this.WhenAnyValue(x => x.IsViewMode);
             IObservable<bool> editMode = this.WhenAnyValue(x => x.IsEditMode);
             IObservable<bool> addMode = this.WhenAnyValue(x => x.IsAddMode);
@@ -124,20 +114,14 @@ namespace Budget.ViewModels
             switch(mode)
             {
                 case CalendarModeEnum.Add:
-                    Tabs[0].IsSelected = false;
-                    Tabs[1].IsSelected = true;
-                    Tabs[2].IsSelected = false;
+                    SelectedTabIndex = 1;
                     break;
                 case CalendarModeEnum.Edit:
-                    Tabs[0].IsSelected = false;
-                    Tabs[1].IsSelected = false;
-                    Tabs[2].IsSelected = true;
+                    SelectedTabIndex = 2;
                     break;
                 case CalendarModeEnum.View:
                 default:
-                    Tabs[0].IsSelected = true;
-                    Tabs[1].IsSelected = false;
-                    Tabs[2].IsSelected = false;
+                    SelectedTabIndex = 0;
                     break;
             }
             
