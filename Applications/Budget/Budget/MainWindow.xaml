@@ -33,8 +33,8 @@
                 <RadioButton IsChecked="{Binding IsEditMode}" Grid.Row="3">Edit</RadioButton>
             </Grid>
             <Grid Grid.Row="1" Grid.ColumnSpan="2">
-                <TabControl ItemsSource="{Binding Tabs}">
-                    <TabItem Header="View">
+                <TabControl SelectedIndex="{Binding SelectedTabIndex}" >
+                    <TabItem Header="View" >
                         <uc:ViewUserControl/>
                     </TabItem>
                     <TabItem Header="Add">

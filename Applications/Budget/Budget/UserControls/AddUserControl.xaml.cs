@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Budget.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace Budget.UserControls
         public AddUserControl()
         {
             InitializeComponent();
+            DataContext = new AddUserControlViewModel();
         }
     }
 }

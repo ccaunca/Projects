@@ -112,6 +112,7 @@
     <Compile Include="UserControls\ViewUserControl.xaml.cs">
       <DependentUpon>ViewUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AddUserControlViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -171,7 +172,12 @@
   <ItemGroup>
     <Resource Include="Images\Purse.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Budget.Models\Budget.Models.csproj">
+      <Project>{9884D601-3ED7-4C40-AE9B-9D72E66D5215}</Project>
+      <Name>Budget.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
