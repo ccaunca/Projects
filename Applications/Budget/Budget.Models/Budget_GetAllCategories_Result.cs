@@ -10,17 +10,9 @@
 namespace Budget.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Budget_Transactions
+    public partial class Budget_GetAllCategories_Result
     {
-        public int TransactionID { get; set; }
-        public System.DateTime DateTime { get; set; }
-        public decimal Amount { get; set; }
-        public string Description { get; set; }
-        public int CategoryID { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-    
-        public virtual Budget_Categories Budget_Categories { get; set; }
+        public string Category { get; set; }
     }
 }

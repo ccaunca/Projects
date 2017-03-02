@@ -12,6 +12,8 @@ namespace Budget.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class CarloniusEntities : DbContext
     {
@@ -27,5 +29,10 @@ namespace Budget.Models
     
         public virtual DbSet<Budget_Categories> Budget_Categories { get; set; }
         public virtual DbSet<Budget_Transactions> Budget_Transactions { get; set; }
+    
+        public virtual ObjectResult<Budget_GetAllCategories_Result> Budget_GetAllCategories()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Budget_GetAllCategories_Result>("Budget_GetAllCategories");
+        }
     }
 }

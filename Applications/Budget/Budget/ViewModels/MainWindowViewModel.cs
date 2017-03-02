@@ -16,13 +16,13 @@ namespace Budget.ViewModels
             get { return _isViewMode; }
             set { this.RaiseAndSetIfChanged(ref _isViewMode, value); }
         }
-        private bool _isAddMode = false;
+        private bool _isAddMode;
         public bool IsAddMode
         {
             get { return _isAddMode; }
             set { this.RaiseAndSetIfChanged(ref _isAddMode, value); }
         }
-        private bool _isEditMode = false;
+        private bool _isEditMode;
         public bool IsEditMode
         {
             get { return _isEditMode; }
@@ -52,16 +52,24 @@ namespace Budget.ViewModels
             get { return _selectedTabIndex; }
             set { this.RaiseAndSetIfChanged(ref _selectedTabIndex, value); }
         }
-
+        private AddUserControlViewModel _addUserControlViewModel;
+        public AddUserControlViewModel AddUserControlViewModel
+        {
+            get { return _addUserControlViewModel; }
+            set { this.RaiseAndSetIfChanged(ref _addUserControlViewModel, value); }
+        }
+        public IObservable<Nullable<DateTime>> SelectedDateObservable;
         public MainWindowViewModel()
         {
+            AddUserControlViewModel = AddUserControlViewModel.GetInstance();
+            AddUserControlViewModel.Date = DateTimeHelper.PstNow();
             IsViewMode = true;
             SelectedTabIndex = 0;
             SelectionMode = CalendarSelectionMode.SingleRange;
             IObservable<bool> viewMode = this.WhenAnyValue(x => x.IsViewMode);
             IObservable<bool> editMode = this.WhenAnyValue(x => x.IsEditMode);
             IObservable<bool> addMode = this.WhenAnyValue(x => x.IsAddMode);
-            IObservable<Nullable<DateTime>> selectedDate = this.WhenAnyValue(x => x.SelectedDate);
+            SelectedDateObservable = this.WhenAnyValue(x => x.SelectedDate);
             IObserver<bool> viewModeObserver = Observer.Create<bool>(
                 isChecked => ModeUpdate(CalendarModeEnum.View, isChecked),
                 ex => HandleError(CalendarModeEnum.View, ex.Message),
@@ -81,8 +89,8 @@ namespace Budget.ViewModels
             viewMode.Subscribe(viewModeObserver);
             editMode.Subscribe(editModeObserver);
             addMode.Subscribe(addModeObserver);
-            selectedDate.Subscribe(selectedDateObserver);
-            
+            SelectedDateObservable.Subscribe(selectedDateObserver);
+            SelectedDateObservable.Subscribe(AddUserControlViewModel.DateTimeObserver);
         }
         private void ModeUpdate(CalendarModeEnum mode, bool isChecked)
         {

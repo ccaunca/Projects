@@ -54,6 +54,9 @@
     <Compile Include="Budget_Categories.cs">
       <DependentUpon>CarloniusModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Budget_GetAllCategories_Result.cs">
+      <DependentUpon>CarloniusModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Budget_Transactions.cs">
       <DependentUpon>CarloniusModel.tt</DependentUpon>
     </Compile>
@@ -81,7 +84,9 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="CarloniusModel.edmx.diagram">
       <DependentUpon>CarloniusModel.edmx</DependentUpon>
     </None>
