@@ -1,8 +1,11 @@
-﻿using Budget.Models;
+﻿using Budget.Helpers;
+using Budget.Models;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Diagnostics;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 
@@ -35,27 +38,76 @@ namespace Budget.ViewModels
             get { return _date; }
             set { this.RaiseAndSetIfChanged(ref _date, value); }
         }
-        private List<Budget_Categories> _categories;
-        public List<Budget_Categories> Categories
+        private List<string> _categories;
+        public List<string> Categories
         {
             get { return _categories; }
             set { this.RaiseAndSetIfChanged(ref _categories, value); }
         }
-
-        public AddUserControlViewModel()
+        private static AddUserControlViewModel _instance;
+        public static AddUserControlViewModel GetInstance()
         {
-            Categories = 
+            if (_instance == null)
+            {
+                _instance = new AddUserControlViewModel();
+            }
+            return _instance;
+        }
+        public IObserver<Nullable<DateTime>> DateTimeObserver;
+        private AddUserControlViewModel()
+        {
+            DateTimeObserver = Observer.Create<Nullable<DateTime>>(
+                date => UpdateDate(date),
+                ex => HandleException(ex),
+                () => Debug.WriteLine("AddUserControlViewModel dateTimeObserver OnCompleted.")
+            );
+            Categories = new List<string>();
+            using (var context = new CarloniusEntities())
+            {
+                ObjectResult<Budget_GetAllCategories_Result> resultSet = context.Budget_GetAllCategories();
+                List<Budget_GetAllCategories_Result> resultList = (from cat in resultSet select cat).ToList();
+                foreach(Budget_GetAllCategories_Result result in resultList)
+                {
+                    Categories.Add(result.Category);
+                }
+            }
+                
             var canAdd = this.WhenAnyValue(x => x.DescriptionText, x => x.AmountText, (description, amount) => !string.IsNullOrEmpty(description) && !string.IsNullOrEmpty(amount));
             AddCommand = ReactiveCommand.Create(() => Add(Date, DescriptionText, AmountText, TimeText), canAdd);
+        }
+        private void UpdateDate(DateTime? date)
+        {
+            if (date.HasValue)
+                Date = date.Value;
+        }
+        private void HandleException(Exception ex)
+        {
+            Debug.WriteLine("Exception occurred {0}", ex.Message);
+            throw ex;
         }
 
         private IObservable<Unit> Add(DateTime date, string descriptionText, string amountText, string timeText)
         {
-            if (string.IsNullOrEmpty(timeText))
+            return Observable.Start(() =>
             {
-                Debug.WriteLine("TimeText is null or empty");
-            }
-            return Observable.Start((Action)delegate() { Debug.WriteLine("Add Command executed!"); });
+                try
+                {
+                    using (var context = new CarloniusEntities())
+                    {
+                        Budget_Transactions trans = new Budget_Transactions { Amount = Convert.ToDecimal(amountText), DateTime = Date, Description = descriptionText, CategoryID = 1, CreatedDate = DateTimeHelper.PstNow() };
+                        context.Budget_Transactions.Add(trans);
+                        context.SaveChanges();
+                    }
+                    if (string.IsNullOrEmpty(timeText))
+                    {
+                        Debug.WriteLine("TimeText is null or empty");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            });
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Budget.UserControls
         public AddUserControl()
         {
             InitializeComponent();
-            DataContext = new AddUserControlViewModel();
+            DataContext = AddUserControlViewModel.GetInstance();
         }
     }
 }

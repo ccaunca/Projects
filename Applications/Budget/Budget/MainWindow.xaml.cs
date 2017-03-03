@@ -9,12 +9,10 @@ namespace Budget
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainWindowViewModel _viewModel;
         public MainWindow()
         {
-            _viewModel = new MainWindowViewModel();
             InitializeComponent();
-            DataContext = _viewModel;
+            DataContext = new MainWindowViewModel();
         }
     }
 }

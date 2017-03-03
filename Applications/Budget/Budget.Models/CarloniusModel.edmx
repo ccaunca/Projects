@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CarloniusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CarloniusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Budget_Categories">
           <Key>
             <PropertyRef Name="CategoryID" />
@@ -22,6 +22,7 @@
           <Property Name="Amount" Type="decimal" Precision="9" Scale="2" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_Categories_CategoryID">
           <End Role="Budget_Categories" Type="Self.Budget_Categories" Multiplicity="1" />
@@ -35,6 +36,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Budget_GetAllCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="Budget.GetAllCategories" />
         <EntityContainer Name="CarloniusModelStoreContainer">
           <EntitySet Name="Budget_Categories" EntityType="Self.Budget_Categories" Schema="dbo" Table="Budget.Categories" store:Type="Tables" />
           <EntitySet Name="Budget_Transactions" EntityType="Self.Budget_Transactions" Schema="dbo" Table="Budget.Transactions" store:Type="Tables" />
@@ -43,8 +45,7 @@
             <End Role="Budget_Transactions" EntitySet="Budget_Transactions" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarloniusModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -67,6 +68,7 @@
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Budget_Categories" Relationship="Self.FK_Categories_CategoryID" FromRole="Budget_Transactions" ToRole="Budget_Categories" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK_Categories_CategoryID">
           <End Role="Budget_Categories" Type="Self.Budget_Categories" Multiplicity="1" />
@@ -87,7 +89,11 @@
             <End Role="Budget_Categories" EntitySet="Budget_Categories" />
             <End Role="Budget_Transactions" EntitySet="Budget_Transactions" />
           </AssociationSet>
+          <FunctionImport Name="Budget_GetAllCategories" ReturnType="Collection(CarloniusModel.Budget_GetAllCategories_Result)" />
         </EntityContainer>
+        <ComplexType Name="Budget_GetAllCategories_Result">
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -106,6 +112,7 @@
           <EntitySetMapping Name="Budget_Transactions">
             <EntityTypeMapping TypeName="CarloniusModel.Budget_Transactions">
               <MappingFragment StoreEntitySet="Budget_Transactions">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
@@ -114,6 +121,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Budget_GetAllCategories" FunctionName="CarloniusModel.Store.Budget_GetAllCategories" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CarloniusModel.Budget_GetAllCategories_Result">
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
