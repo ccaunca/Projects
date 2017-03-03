@@ -14,5 +14,6 @@ namespace Budget.Models
     public partial class Budget_GetAllCategories_Result
     {
         public string Category { get; set; }
+        public int CategoryID { get; set; }
     }
 }

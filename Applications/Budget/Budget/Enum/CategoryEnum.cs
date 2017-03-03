@@ -8,7 +8,7 @@ namespace Budget.Enum
 {
     public enum CategoryEnum
     {
-        Groceries = 1,
+        Groceries,
         DiningOut,
         Mortgage,
         Adventure,

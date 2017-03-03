@@ -8,12 +8,12 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:uc="clr-namespace:Budget.UserControls"
         mc:Ignorable="d"
-        Title="Budget" Height="550" Width="525"
+        Title="Budget" Height="575" Width="375"
         Icon="Images\Purse.ico">
     <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>

@@ -1,6 +1,7 @@
 ﻿using Budget.Helpers;
 using Budget.Models;
 using ReactiveUI;
+using RoyT.TimePicker;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
@@ -8,29 +9,44 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Windows;
 
 namespace Budget.ViewModels
 {
     public class AddUserControlViewModel : ReactiveObject
     {
         public ReactiveCommand AddCommand { get; private set; }
+        private readonly ObservableAsPropertyHelper<bool> _isAdding;
+        public bool IsAdding { get { return _isAdding.Value; } }
         private string _descriptionText;
         public string DescriptionText
         {
             get { return _descriptionText; }
             set { this.RaiseAndSetIfChanged(ref _descriptionText, value); }
         }
-        private string _amountText;
-        public string AmountText
+        private decimal _transactionAmount;
+        public decimal TransactionAmount
         {
-            get { return _amountText; }
-            set { this.RaiseAndSetIfChanged(ref _amountText, value); }
+            get { return _transactionAmount; }
+            set { this.RaiseAndSetIfChanged(ref _transactionAmount, value); }
         }
-        private string _timeText;
-        public string TimeText
+        private DigitalTime _minTime;
+        public DigitalTime MinTime
         {
-            get { return _timeText; }
-            set { this.RaiseAndSetIfChanged(ref _timeText, value); }
+            get { return _minTime; }
+            set { this.RaiseAndSetIfChanged(ref _minTime, value); }
+        }
+        private DigitalTime _time;
+        public DigitalTime Time
+        {
+            get { return _time; }
+            set { this.RaiseAndSetIfChanged(ref _time, value); }
+        }
+        private DigitalTime _maxTime;
+        public DigitalTime MaxTime
+        {
+            get { return _maxTime; }
+            set { this.RaiseAndSetIfChanged(ref _maxTime, value); }
         }
         private DateTime _date;
         public DateTime Date
@@ -44,6 +60,12 @@ namespace Budget.ViewModels
             get { return _categories; }
             set { this.RaiseAndSetIfChanged(ref _categories, value); }
         }
+        private int _selectedCategory;
+        public int SelectedCategory
+        {
+            get { return _selectedCategory; }
+            set { this.RaiseAndSetIfChanged(ref _selectedCategory, value); }
+        }
         private static AddUserControlViewModel _instance;
         public static AddUserControlViewModel GetInstance()
         {
@@ -56,6 +78,9 @@ namespace Budget.ViewModels
         public IObserver<Nullable<DateTime>> DateTimeObserver;
         private AddUserControlViewModel()
         {
+            Time = new DigitalTime(0, 0);
+            MinTime = new DigitalTime(0, 0);
+            MaxTime = new DigitalTime(23, 59);
             DateTimeObserver = Observer.Create<Nullable<DateTime>>(
                 date => UpdateDate(date),
                 ex => HandleException(ex),
@@ -72,8 +97,19 @@ namespace Budget.ViewModels
                 }
             }
                 
-            var canAdd = this.WhenAnyValue(x => x.DescriptionText, x => x.AmountText, (description, amount) => !string.IsNullOrEmpty(description) && !string.IsNullOrEmpty(amount));
-            AddCommand = ReactiveCommand.Create(() => Add(Date, DescriptionText, AmountText, TimeText), canAdd);
+            var canAdd = this.WhenAnyValue(x => x.DescriptionText, x => x.TransactionAmount, (description, amount) => !string.IsNullOrEmpty(description) && amount > 0);
+            AddCommand = ReactiveCommand.Create(() => AddTransaction(), canAdd);
+            AddCommand.IsExecuting.ToProperty(this, x => x.IsAdding, out _isAdding);
+            IObservable<bool> addObservable = this.WhenAnyValue(x => x.IsAdding);
+            IObserver<bool> addObserver = Observer.Create<bool>(x => UpdateUI());
+            IObservable<int> selectedCategory = this.WhenAnyValue(x => x.SelectedCategory);
+            IObserver<int> updateSelectedCategory = Observer.Create<int>(x => Debug.WriteLine("Selected Category = {0}", x));
+            addObservable.Subscribe(addObserver);
+            selectedCategory.Subscribe(updateSelectedCategory);
+        }
+        private void UpdateUI()
+        {
+            
         }
         private void UpdateDate(DateTime? date)
         {
@@ -86,7 +122,7 @@ namespace Budget.ViewModels
             throw ex;
         }
 
-        private IObservable<Unit> Add(DateTime date, string descriptionText, string amountText, string timeText)
+        private IObservable<Unit> AddTransaction()
         {
             return Observable.Start(() =>
             {
@@ -94,13 +130,10 @@ namespace Budget.ViewModels
                 {
                     using (var context = new CarloniusEntities())
                     {
-                        Budget_Transactions trans = new Budget_Transactions { Amount = Convert.ToDecimal(amountText), DateTime = Date, Description = descriptionText, CategoryID = 1, CreatedDate = DateTimeHelper.PstNow() };
+
+                        Budget_Transactions trans = new Budget_Transactions { Amount = TransactionAmount, DateTime = SetDateTime(Date, Time), Description = DescriptionText, CategoryID = SelectedCategory, CreatedDate = DateTimeHelper.PstNow() };
                         context.Budget_Transactions.Add(trans);
                         context.SaveChanges();
-                    }
-                    if (string.IsNullOrEmpty(timeText))
-                    {
-                        Debug.WriteLine("TimeText is null or empty");
                     }
                 }
                 catch (Exception ex)
@@ -108,6 +141,11 @@ namespace Budget.ViewModels
                     throw ex;
                 }
             });
+        }
+
+        private DateTime SetDateTime(DateTime date, DigitalTime time)
+        {
+            return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, 0);
         }
     }
 }
