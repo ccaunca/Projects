@@ -33,7 +33,7 @@
                 <RadioButton IsChecked="{Binding IsEditMode}" Grid.Row="3">Edit</RadioButton>
             </Grid>
             <Grid Grid.Row="1" Grid.ColumnSpan="2">
-                <TabControl SelectedIndex="{Binding SelectedTabIndex}" >
+                <TabControl SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                     <TabItem Header="View" >
                         <uc:ViewUserControl/>
                     </TabItem>

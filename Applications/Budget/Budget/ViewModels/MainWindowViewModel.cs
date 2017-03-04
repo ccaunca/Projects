@@ -69,6 +69,7 @@ namespace Budget.ViewModels
             IObservable<bool> viewMode = this.WhenAnyValue(x => x.IsViewMode);
             IObservable<bool> editMode = this.WhenAnyValue(x => x.IsEditMode);
             IObservable<bool> addMode = this.WhenAnyValue(x => x.IsAddMode);
+            IObservable<int> tabSelection = this.WhenAnyValue(x => x.SelectedTabIndex);
             SelectedDateObservable = this.WhenAnyValue(x => x.SelectedDate);
             IObserver<bool> viewModeObserver = Observer.Create<bool>(
                 isChecked => ModeUpdate(CalendarModeEnum.View, isChecked),
@@ -82,6 +83,8 @@ namespace Budget.ViewModels
                 isChecked => ModeUpdate(CalendarModeEnum.Add, isChecked),
                 ex => HandleError(CalendarModeEnum.Add, ex.Message),
                 () => OnCompleted(CalendarModeEnum.Add));
+            IObserver<int> updateRadioButton = Observer.Create<int>(
+                tabIndex => UpdateRadioButtonSelection(tabIndex));
             IObserver<Nullable<DateTime>> selectedDateObserver = Observer.Create<Nullable<DateTime>>(
                 date => DisplaySelectedDate(date),
                 ex => Debug.WriteLine("selectedDateObserver OnError {0}", ex.Message),
@@ -91,6 +94,23 @@ namespace Budget.ViewModels
             addMode.Subscribe(addModeObserver);
             SelectedDateObservable.Subscribe(selectedDateObserver);
             SelectedDateObservable.Subscribe(AddUserControlViewModel.DateTimeObserver);
+            tabSelection.Subscribe(updateRadioButton);
+        }
+        private void UpdateRadioButtonSelection(int tabIdx)
+        {
+            switch(tabIdx)
+            {                
+                case 1:
+                    IsAddMode = true;
+                    break;
+                case 2:
+                    IsEditMode = true;
+                    break;
+                case 0:
+                default:
+                    IsViewMode = true;
+                    break;
+            }
         }
         private void ModeUpdate(CalendarModeEnum mode, bool isChecked)
         {
