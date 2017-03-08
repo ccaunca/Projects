@@ -58,11 +58,19 @@ namespace Budget.ViewModels
             get { return _addUserControlViewModel; }
             set { this.RaiseAndSetIfChanged(ref _addUserControlViewModel, value); }
         }
+        private EditUserControlViewModel _editUserControlViewModel;
+        public EditUserControlViewModel EditUserControlViewModel
+        {
+            get { return _editUserControlViewModel; }
+            set { this.RaiseAndSetIfChanged(ref _editUserControlViewModel, value); }
+        }
         public IObservable<Nullable<DateTime>> SelectedDateObservable;
         public MainWindowViewModel()
         {
             AddUserControlViewModel = AddUserControlViewModel.GetInstance();
             AddUserControlViewModel.Date = DateTimeHelper.PstNow();
+            EditUserControlViewModel = EditUserControlViewModel.GetInstance();
+            EditUserControlViewModel.Date = DateTimeHelper.PstNow();
             IsViewMode = true;
             SelectedTabIndex = 0;
             SelectionMode = CalendarSelectionMode.SingleRange;
@@ -86,7 +94,7 @@ namespace Budget.ViewModels
             IObserver<int> updateRadioButton = Observer.Create<int>(
                 tabIndex => UpdateRadioButtonSelection(tabIndex));
             IObserver<Nullable<DateTime>> selectedDateObserver = Observer.Create<Nullable<DateTime>>(
-                date => DisplaySelectedDate(date),
+                date => UpdateSelectedDate(date),
                 ex => Debug.WriteLine("selectedDateObserver OnError {0}", ex.Message),
                 () => Debug.WriteLine("selectedDateObserver OnCompleted"));
             viewMode.Subscribe(viewModeObserver);
@@ -94,7 +102,9 @@ namespace Budget.ViewModels
             addMode.Subscribe(addModeObserver);
             SelectedDateObservable.Subscribe(selectedDateObserver);
             SelectedDateObservable.Subscribe(AddUserControlViewModel.DateTimeObserver);
+            SelectedDateObservable.Subscribe(EditUserControlViewModel.DateTimeObserver);
             tabSelection.Subscribe(updateRadioButton);
+            SelectedDate = DateTimeHelper.PstNow();
         }
         private void UpdateRadioButtonSelection(int tabIdx)
         {
@@ -162,12 +172,16 @@ namespace Budget.ViewModels
         {
             Debug.WriteLine("{0}Mode completed", mode);
         }
-        private void DisplaySelectedDate(Nullable<DateTime> selectedDate)
+        private void UpdateSelectedDate(Nullable<DateTime> selectedDate)
         {
             if (selectedDate.HasValue)
+            {
                 Debug.WriteLine(String.Format("Selected Date is {0}", selectedDate.Value.ToShortDateString()));
+            }
             else
+            {
                 Debug.WriteLine("Selected Date is null");
+            }
         }
     }
 }

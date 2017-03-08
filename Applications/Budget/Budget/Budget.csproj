@@ -108,6 +108,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Base\ViewMode.cs" />
+    <Compile Include="Converter\AmountConverter.cs" />
     <Compile Include="Enum\CalendarModeEnum.cs" />
     <Compile Include="Base\CalendarViewMode.cs" />
     <Compile Include="Enum\CategoryEnum.cs" />
@@ -122,6 +123,7 @@
       <DependentUpon>ViewUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AddUserControlViewModel.cs" />
+    <Compile Include="ViewModels\EditUserControlViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -179,7 +181,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Purse.ico" />
+    <Resource Include="Images\Purse.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Budget.Models\Budget.Models.csproj">
@@ -189,6 +193,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Behavior\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\X.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

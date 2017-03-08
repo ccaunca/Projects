@@ -34,5 +34,14 @@ namespace Budget.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Budget_GetAllCategories_Result>("Budget_GetAllCategories");
         }
+    
+        public virtual ObjectResult<GetTransactionsByDateTime_Result> GetTransactionsByDateTime(Nullable<System.DateTime> dateTime)
+        {
+            var dateTimeParameter = dateTime.HasValue ?
+                new ObjectParameter("DateTime", dateTime) :
+                new ObjectParameter("DateTime", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTransactionsByDateTime_Result>("GetTransactionsByDateTime", dateTimeParameter);
+        }
     }
 }

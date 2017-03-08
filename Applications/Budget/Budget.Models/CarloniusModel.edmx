@@ -37,6 +37,9 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="Budget_GetAllCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="Budget.GetAllCategories" />
+        <Function Name="GetTransactionsByDateTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DateTime" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="CarloniusModelStoreContainer">
           <EntitySet Name="Budget_Categories" EntityType="Self.Budget_Categories" Schema="dbo" Table="Budget.Categories" store:Type="Tables" />
           <EntitySet Name="Budget_Transactions" EntityType="Self.Budget_Transactions" Schema="dbo" Table="Budget.Transactions" store:Type="Tables" />
@@ -90,10 +93,21 @@
             <End Role="Budget_Transactions" EntitySet="Budget_Transactions" />
           </AssociationSet>
           <FunctionImport Name="Budget_GetAllCategories" ReturnType="Collection(CarloniusModel.Budget_GetAllCategories_Result)" />
+          <FunctionImport Name="GetTransactionsByDateTime" ReturnType="Collection(CarloniusModel.GetTransactionsByDateTime_Result)">
+          <Parameter Name="DateTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Budget_GetAllCategories_Result">
           <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="CategoryID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetTransactionsByDateTime_Result">
+          <Property Type="Int32" Name="TransactionID" Nullable="false" />
+          <Property Type="DateTime" Name="DateTime" Nullable="false" Precision="23" />
+          <Property Type="Decimal" Name="Amount" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -127,6 +141,18 @@
               <ComplexTypeMapping TypeName="CarloniusModel.Budget_GetAllCategories_Result">
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTransactionsByDateTime" FunctionName="CarloniusModel.Store.GetTransactionsByDateTime">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CarloniusModel.GetTransactionsByDateTime_Result">
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

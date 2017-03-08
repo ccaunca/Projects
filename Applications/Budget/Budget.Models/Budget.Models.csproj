@@ -75,6 +75,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CarloniusModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="CarloniusRepository.cs" />
+    <Compile Include="GetTransactionsByDateTime_Result.cs">
+      <DependentUpon>CarloniusModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

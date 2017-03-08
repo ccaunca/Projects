@@ -4,9 +4,7 @@ using ReactiveUI;
 using RoyT.TimePicker;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Objects;
 using System.Diagnostics;
-using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows;
@@ -54,8 +52,8 @@ namespace Budget.ViewModels
             get { return _date; }
             set { this.RaiseAndSetIfChanged(ref _date, value); }
         }
-        private List<string> _categories;
-        public List<string> Categories
+        private List<Budget_GetAllCategories_Result> _categories;
+        public List<Budget_GetAllCategories_Result> Categories
         {
             get { return _categories; }
             set { this.RaiseAndSetIfChanged(ref _categories, value); }
@@ -86,30 +84,20 @@ namespace Budget.ViewModels
                 ex => HandleException(ex),
                 () => Debug.WriteLine("AddUserControlViewModel dateTimeObserver OnCompleted.")
             );
-            Categories = new List<string>();
-            using (var context = new CarloniusEntities())
-            {
-                ObjectResult<Budget_GetAllCategories_Result> resultSet = context.Budget_GetAllCategories();
-                List<Budget_GetAllCategories_Result> resultList = (from cat in resultSet select cat).ToList();
-                foreach(Budget_GetAllCategories_Result result in resultList)
-                {
-                    Categories.Add(result.Category);
-                }
-            }
-                
+            Categories = CarloniusRepository.GetAllCategories();                
             var canAdd = this.WhenAnyValue(x => x.DescriptionText, x => x.TransactionAmount, (description, amount) => !string.IsNullOrEmpty(description) && amount > 0);
             AddCommand = ReactiveCommand.Create(() => AddTransaction(), canAdd);
             AddCommand.IsExecuting.ToProperty(this, x => x.IsAdding, out _isAdding);
             IObservable<bool> addObservable = this.WhenAnyValue(x => x.IsAdding);
             IObserver<bool> addObserver = Observer.Create<bool>(x => UpdateUI());
-            IObservable<int> selectedCategory = this.WhenAnyValue(x => x.SelectedCategory);
-            IObserver<int> updateSelectedCategory = Observer.Create<int>(x => Debug.WriteLine("Selected Category = {0}", x));
             addObservable.Subscribe(addObserver);
-            selectedCategory.Subscribe(updateSelectedCategory);
         }
         private void UpdateUI()
-        {
-            
+        {   // Completion upon adding transaction
+            if (!IsAdding && TransactionAmount != 0)
+            {   // TODO: This will display even if there's an exception in AddTransaction, need to fix this
+                MessageBox.Show("Add Successful!", "Transaction Add", MessageBoxButton.OK, MessageBoxImage.None);
+            }
         }
         private void UpdateDate(DateTime? date)
         {
@@ -126,26 +114,8 @@ namespace Budget.ViewModels
         {
             return Observable.Start(() =>
             {
-                try
-                {
-                    using (var context = new CarloniusEntities())
-                    {
-
-                        Budget_Transactions trans = new Budget_Transactions { Amount = TransactionAmount, DateTime = SetDateTime(Date, Time), Description = DescriptionText, CategoryID = SelectedCategory, CreatedDate = DateTimeHelper.PstNow() };
-                        context.Budget_Transactions.Add(trans);
-                        context.SaveChanges();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                CarloniusRepository.AddTransaction(new Budget_Transactions { Amount = TransactionAmount, DateTime = DateTimeHelper.SetDateTime(Date, Time), Description = DescriptionText, CategoryID = SelectedCategory, CreatedDate = DateTimeHelper.PstNow() });
             });
-        }
-
-        private DateTime SetDateTime(DateTime date, DigitalTime time)
-        {
-            return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, 0);
         }
     }
 }

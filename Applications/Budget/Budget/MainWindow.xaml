@@ -8,31 +8,16 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:uc="clr-namespace:Budget.UserControls"
         mc:Ignorable="d"
-        Title="Budget" Height="575" Width="375"
+        Title="Budget" Height="575" Width="550"
         Icon="Images\Purse.ico">
     <Grid>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Calendar SelectionMode="{Binding SelectionMode}" SelectedDate="{Binding SelectedDate}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <Grid Grid.Row="0" Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <RadioButton IsChecked="{Binding IsViewMode}" Grid.Row="1">View</RadioButton>
-                <RadioButton IsChecked="{Binding IsAddMode}" Grid.Row="2">Add</RadioButton>
-                <RadioButton IsChecked="{Binding IsEditMode}" Grid.Row="3">Edit</RadioButton>
-            </Grid>
-            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <Calendar Grid.Row="0" SelectionMode="{Binding SelectionMode}" SelectedDate="{Binding SelectedDate}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Grid Grid.Row="1">
                 <TabControl SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                     <TabItem Header="View" >
                         <uc:ViewUserControl/>

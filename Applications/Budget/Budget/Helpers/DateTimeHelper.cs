@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RoyT.TimePicker;
+using System;
 
 namespace Budget.Helpers
 {
@@ -11,6 +8,10 @@ namespace Budget.Helpers
         public static DateTime PstNow()
         {
             return DateTime.UtcNow.AddHours(-8);
+        }
+        public static DateTime SetDateTime(DateTime date, DigitalTime time)
+        {
+            return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, 0);
         }
     }
 }
