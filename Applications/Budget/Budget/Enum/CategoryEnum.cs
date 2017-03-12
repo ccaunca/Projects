@@ -1,20 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Budget.Converter;
+using System.ComponentModel;
 
 namespace Budget.Enum
 {
+    [TypeConverter(typeof(EnumDescriptionTypeConverter))]
     public enum CategoryEnum
     {
-        Groceries,
+        [Description("Groceries")]
+        Groceries = 1,
+        [Description("Dining Out")]
         DiningOut,
+        [Description("Mortgage")]
         Mortgage,
+        [Description("Adventure")]
         Adventure,
+        [Description("Gas")]
         Gas,
+        [Description("Gifts")]
         Gifts,
+        [Description("Household")]
         Household,
-        Shopping
+        [Description("Shopping")]
+        Shopping,
+        [Description("Entertainment")]
+        Entertainment
     }
 }

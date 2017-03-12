@@ -45,7 +45,14 @@ namespace Budget.ViewModels
             get { return _selectedTransaction; }
             set { this.RaiseAndSetIfChanged(ref _selectedTransaction, value); }
         }
+        private int _selectedCategoryIndex;
+        public int SelectedCategoryIndex
+        {
+            get { return _selectedCategoryIndex; }
+            set { this.RaiseAndSetIfChanged(ref _selectedCategoryIndex, value); }
+        }
         public ReactiveCommand DeleteTransactionCommand { get; private set; }
+        public ReactiveCommand SaveChangesCommand { get; private set; }
         public IObserver<Nullable<DateTime>> DateTimeObserver;
         private EditUserControlViewModel()
         {
@@ -58,8 +65,35 @@ namespace Budget.ViewModels
             var canDeleteTransaction = this.WhenAny(x => x.SelectedTransaction,
                 (selectedTrans) => selectedTrans != null);
             DeleteTransactionCommand = ReactiveCommand.Create(() => DeleteTransaction(), canDeleteTransaction);
+            var canSaveChangesCommand = this.WhenAny(x => x.Transactions,
+                (trans) => trans != null);
+            SaveChangesCommand = ReactiveCommand.Create(() => SaveChanges(), canSaveChangesCommand);
+            Transactions = new ObservableCollection<Budget_Transactions>();
+            Transactions.CollectionChanged += Transactions_CollectionChanged;
         }
 
+        private void Transactions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach(var item in e.NewItems)
+                {
+
+                }
+            }
+            if (e.OldItems != null)
+            {
+                foreach(var item in e.OldItems)
+                {
+
+                }
+            }
+        }
+
+        private void SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
         private void DeleteTransaction()
         {
             CarloniusRepository.DeleteTransaction(SelectedTransaction);

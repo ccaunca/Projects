@@ -8,7 +8,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:uc="clr-namespace:Budget.UserControls"
         mc:Ignorable="d"
-        Title="Budget" Height="575" Width="550"
+        Title="Budget" Height="575" Width="600"
         Icon="Images\Purse.ico">
     <Grid>
         <Grid>

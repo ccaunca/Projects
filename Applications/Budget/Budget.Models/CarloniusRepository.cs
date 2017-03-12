@@ -30,6 +30,37 @@ namespace Budget.Models
             }
             return categories;
         }
+        public static Budget_Categories GetCategory(string category)
+        {
+            Budget_Categories cat = null;
+            try
+            {
+                using (var context = new CarloniusEntities())
+                {
+                    cat = context.Budget_Categories.FirstOrDefault(c => c.Category.Equals(category, StringComparison.OrdinalIgnoreCase));
+                }
+            }
+            catch(Exception ex)
+            {
+                HandleException(ex, "GetCategory");
+            }
+            return cat;
+        }
+        public static void InsertCategory(Budget_Categories category)
+        {
+            try
+            {
+                using (var context = new CarloniusEntities())
+                {
+                    context.Budget_Categories.Add(category);
+                    context.SaveChanges();
+                }
+            }
+            catch(Exception ex)
+            {
+                HandleException(ex, "InsertCategory");
+            }
+        }
         public static ObservableCollection<Budget_Transactions> GetTransactionsByDateTime(DateTime datetime)
         {
             ObservableCollection<Budget_Transactions> transactions = new ObservableCollection<Budget_Transactions>();

@@ -1,5 +1,6 @@
 ﻿using Budget.Helpers;
 using Budget.Models;
+using Budget.Views;
 using ReactiveUI;
 using RoyT.TimePicker;
 using System;
@@ -14,6 +15,7 @@ namespace Budget.ViewModels
     public class AddUserControlViewModel : ReactiveObject
     {
         public ReactiveCommand AddCommand { get; private set; }
+        public ReactiveCommand AddCategoryCommand { get; private set; }
         private readonly ObservableAsPropertyHelper<bool> _isAdding;
         public bool IsAdding { get { return _isAdding.Value; } }
         private string _descriptionText;
@@ -74,24 +76,38 @@ namespace Budget.ViewModels
             return _instance;
         }
         public IObserver<Nullable<DateTime>> DateTimeObserver;
+        public void GetAllCategories()
+        {
+            Categories = CarloniusRepository.GetAllCategories();
+        }
         private AddUserControlViewModel()
         {
             Time = new DigitalTime(0, 0);
             MinTime = new DigitalTime(0, 0);
             MaxTime = new DigitalTime(23, 59);
+
             DateTimeObserver = Observer.Create<Nullable<DateTime>>(
                 date => UpdateDate(date),
                 ex => HandleException(ex),
                 () => Debug.WriteLine("AddUserControlViewModel dateTimeObserver OnCompleted.")
             );
-            Categories = CarloniusRepository.GetAllCategories();                
-            var canAdd = this.WhenAnyValue(x => x.DescriptionText, x => x.TransactionAmount, (description, amount) => !string.IsNullOrEmpty(description) && amount > 0);
+            GetAllCategories();
+            var canAdd = this.WhenAnyValue(x => x.DescriptionText, x => x.TransactionAmount,
+                (description, amount) => !string.IsNullOrEmpty(description) && amount > 0);
             AddCommand = ReactiveCommand.Create(() => AddTransaction(), canAdd);
             AddCommand.IsExecuting.ToProperty(this, x => x.IsAdding, out _isAdding);
+            AddCategoryCommand = ReactiveCommand.Create(() => AddCategory());
             IObservable<bool> addObservable = this.WhenAnyValue(x => x.IsAdding);
             IObserver<bool> addObserver = Observer.Create<bool>(x => UpdateUI());
             addObservable.Subscribe(addObserver);
         }
+
+        private void AddCategory()
+        {
+            AddCategoryWindow window = new AddCategoryWindow();
+            window.Show();
+        }
+
         private void UpdateUI()
         {   // Completion upon adding transaction
             if (!IsAdding && TransactionAmount != 0)

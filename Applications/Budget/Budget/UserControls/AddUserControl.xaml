@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:Budget.UserControls"
              xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextBoxControl"
              xmlns:timepicker="clr-namespace:RoyT.TimePicker;assembly=RoyT.TimePicker"
+             xmlns:e="clr-namespace:Budget.Enum"
+             xmlns:extensions="clr-namespace:Budget.Extensions"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="225" d:DesignWidth="300">
     <UserControl.Resources>
@@ -21,6 +24,12 @@
         </Style>
         <Style TargetType="Button">
             <Setter Property="Width" Value="75"/>
+            <Setter Property="Margin" Value="5,5,5,5"/>
+        </Style>
+        <Style BasedOn="{StaticResource {x:Type Button}}"
+               TargetType="Button" x:Key="AddCategoryButton">
+            <Setter Property="Width" Value="25"/>
+            <Setter Property="Height" Value="30"/>
             <Setter Property="Margin" Value="5,5,5,5"/>
         </Style>
     </UserControl.Resources>
@@ -46,10 +55,15 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <ComboBox Grid.Column="0" HorizontalAlignment="Center" Height="23" Width="90" ItemsSource="{Binding Categories}"
-                      DisplayMemberPath="Category" SelectedIndex="{Binding SelectedCategory, Mode=TwoWay}"/>
-            <Button Grid.Column="1" HorizontalAlignment="Center" Content="Add" Command="{Binding AddCommand}"></Button>
+            <ComboBox x:Name="comboBoxCategories" Grid.Column="0" HorizontalAlignment="Center" Height="23" Width="90"
+                      ItemsSource="{Binding Source={extensions:EnumBindingSource {x:Type e:CategoryEnum}}}"
+                      SelectedIndex="{Binding SelectedCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Grid.Column="1" HorizontalAlignment="Left" Command="{Binding AddCategoryCommand}" Style="{StaticResource AddCategoryButton}">
+                <Image HorizontalAlignment="Left" Source="C:\GitHub\Applications\Budget\Budget\Images\+.png"/>
+            </Button>
+            <Button Grid.Column="2" HorizontalAlignment="Center" Content="Add" Command="{Binding AddCommand}"/>
         </Grid>
     </Grid>
 </UserControl>
