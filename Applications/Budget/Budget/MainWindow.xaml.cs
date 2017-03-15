@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Budget.ViewModels;
 using System.Windows;
-using Budget.ViewModels;
 
 namespace Budget
 {

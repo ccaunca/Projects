@@ -23,6 +23,7 @@
           <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
         <Association Name="FK_Categories_CategoryID">
           <End Role="Budget_Categories" Type="Self.Budget_Categories" Multiplicity="1" />
@@ -72,6 +73,7 @@
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Budget_Categories" Relationship="Self.FK_Categories_CategoryID" FromRole="Budget_Transactions" ToRole="Budget_Categories" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_Categories_CategoryID">
           <End Role="Budget_Categories" Type="Self.Budget_Categories" Multiplicity="1" />
@@ -127,6 +129,7 @@
           <EntitySetMapping Name="Budget_Transactions">
             <EntityTypeMapping TypeName="CarloniusModel.Budget_Transactions">
               <MappingFragment StoreEntitySet="Budget_Transactions">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />

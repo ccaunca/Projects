@@ -110,11 +110,13 @@
     <Compile Include="Base\ViewMode.cs" />
     <Compile Include="Converter\AmountConverter.cs" />
     <Compile Include="Converter\EnumDescriptionTypeConverter.cs" />
+    <Compile Include="Converter\TransactionConverter.cs" />
     <Compile Include="Enum\CalendarModeEnum.cs" />
     <Compile Include="Base\CalendarViewMode.cs" />
     <Compile Include="Enum\CategoryEnum.cs" />
     <Compile Include="Extensions\EnumBindingSourceExtension.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
+    <Compile Include="Transaction.cs" />
     <Compile Include="UserControls\AddUserControl.xaml.cs">
       <DependentUpon>AddUserControl.xaml</DependentUpon>
     </Compile>

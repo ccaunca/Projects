@@ -14,7 +14,8 @@ namespace Budget.Converter
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            string dollarAmount = value.ToString();
+            return dollarAmount.Remove(0, 1);
         }
     }
 }

@@ -19,18 +19,19 @@
             <RowDefinition Height="0.15*"/>
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="0" CanUserDeleteRows="False" AutoGenerateColumns="False"
-                  SelectedItem="{Binding SelectedTransaction, Mode=TwoWay}" ItemsSource="{Binding Transactions, Mode=TwoWay}">
+                  SelectedItem="{Binding SelectedTransaction, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Transactions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.InputBindings>
                 <KeyBinding Key="Delete" Command="{Binding DeleteTransactionCommand}"/>
             </DataGrid.InputBindings>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="DateTime" Binding="{Binding DateTime}"/>
-                <DataGridTextColumn Header="Amount" Binding="{Binding Amount, Converter={StaticResource amountConverter}}"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="DateTime" Binding="{Binding DateTime, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=LostFocus, Converter={StaticResource amountConverter}}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridComboBoxColumn Width="100" Header="Category"
                                         ItemsSource="{Binding Source={extensions:EnumBindingSource {x:Type enum:CategoryEnum}}}"
-                                        SelectedValueBinding="{Binding SelectedCategoryIndex}"/>
-                <DataGridTextColumn Header="CreatedDate" Binding="{Binding CreatedDate}"/>
+                                        SelectedItemBinding="{Binding Category, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="CreatedDate" Binding="{Binding CreatedDate, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

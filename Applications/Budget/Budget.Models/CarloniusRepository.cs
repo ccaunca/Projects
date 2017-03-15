@@ -105,6 +105,22 @@ namespace Budget.Models
                 HandleException(ex, "AddTransaction");
             }
         }
+        public static void UpdateTransaction(Budget_Transactions transaction)
+        {
+            try
+            {
+                using (var context = new CarloniusEntities())
+                {
+                    context.Budget_Transactions.Attach(transaction);
+                    context.Entry(transaction).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
+                }
+            }
+            catch(Exception ex)
+            {
+                HandleException(ex, "UpdateTransaction");
+            }
+        }
         public static void DeleteTransaction(Budget_Transactions transaction)
         {
             try

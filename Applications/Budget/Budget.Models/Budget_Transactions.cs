@@ -20,6 +20,7 @@ namespace Budget.Models
         public string Description { get; set; }
         public int CategoryID { get; set; }
         public System.DateTime CreatedDate { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
     
         public virtual Budget_Categories Budget_Categories { get; set; }
     }

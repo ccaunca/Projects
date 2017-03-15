@@ -1,4 +1,5 @@
-﻿using Budget.Helpers;
+﻿using Budget.Enum;
+using Budget.Helpers;
 using Budget.Models;
 using Budget.Views;
 using ReactiveUI;
@@ -60,8 +61,8 @@ namespace Budget.ViewModels
             get { return _categories; }
             set { this.RaiseAndSetIfChanged(ref _categories, value); }
         }
-        private int _selectedCategory;
-        public int SelectedCategory
+        private CategoryEnum _selectedCategory;
+        public CategoryEnum SelectedCategory
         {
             get { return _selectedCategory; }
             set { this.RaiseAndSetIfChanged(ref _selectedCategory, value); }
@@ -130,7 +131,16 @@ namespace Budget.ViewModels
         {
             return Observable.Start(() =>
             {
-                CarloniusRepository.AddTransaction(new Budget_Transactions { Amount = TransactionAmount, DateTime = DateTimeHelper.SetDateTime(Date, Time), Description = DescriptionText, CategoryID = SelectedCategory, CreatedDate = DateTimeHelper.PstNow() });
+                CarloniusRepository.AddTransaction(
+                    new Budget_Transactions
+                    {
+                        Amount = TransactionAmount,
+                        DateTime = DateTimeHelper.SetDateTime(Date, Time),
+                        Description = DescriptionText,
+                        CategoryID = (int)SelectedCategory,
+                        CreatedDate = DateTimeHelper.PstNow(),
+                        ModifiedDate = null
+                    });
             });
         }
     }

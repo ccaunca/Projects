@@ -59,7 +59,7 @@
             </Grid.ColumnDefinitions>
             <ComboBox x:Name="comboBoxCategories" Grid.Column="0" HorizontalAlignment="Center" Height="23" Width="90"
                       ItemsSource="{Binding Source={extensions:EnumBindingSource {x:Type e:CategoryEnum}}}"
-                      SelectedIndex="{Binding SelectedCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                      SelectedValue="{Binding SelectedCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Grid.Column="1" HorizontalAlignment="Left" Command="{Binding AddCategoryCommand}" Style="{StaticResource AddCategoryButton}">
                 <Image HorizontalAlignment="Left" Source="C:\GitHub\Applications\Budget\Budget\Images\+.png"/>
             </Button>

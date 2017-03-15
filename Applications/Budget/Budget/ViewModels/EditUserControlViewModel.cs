@@ -1,21 +1,21 @@
-﻿using Budget.Helpers;
+﻿using Budget.Converter;
+using Budget.Helpers;
 using Budget.Models;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace Budget.ViewModels
 {
     public class EditUserControlViewModel : ReactiveObject
     {
-        private ObservableCollection<Budget_Transactions> _transactions;
-        public ObservableCollection<Budget_Transactions> Transactions
+        private ReactiveList<Transaction> _transactions;
+        public ReactiveList<Transaction> Transactions
         {
             get { return _transactions; }
             set { this.RaiseAndSetIfChanged(ref _transactions, value); }
@@ -39,8 +39,8 @@ namespace Budget.ViewModels
             get { return _categories; }
             set { this.RaiseAndSetIfChanged(ref _categories, value); }
         }
-        private Budget_Transactions _selectedTransaction;
-        public Budget_Transactions SelectedTransaction
+        private Transaction _selectedTransaction;
+        public Transaction SelectedTransaction
         {
             get { return _selectedTransaction; }
             set { this.RaiseAndSetIfChanged(ref _selectedTransaction, value); }
@@ -50,6 +50,12 @@ namespace Budget.ViewModels
         {
             get { return _selectedCategoryIndex; }
             set { this.RaiseAndSetIfChanged(ref _selectedCategoryIndex, value); }
+        }
+        private bool _changesMade;
+        public bool ChangesMade
+        {
+            get { return _changesMade; }
+            set { this.RaiseAndSetIfChanged(ref _changesMade, value); }
         }
         public ReactiveCommand DeleteTransactionCommand { get; private set; }
         public ReactiveCommand SaveChangesCommand { get; private set; }
@@ -65,13 +71,12 @@ namespace Budget.ViewModels
             var canDeleteTransaction = this.WhenAny(x => x.SelectedTransaction,
                 (selectedTrans) => selectedTrans != null);
             DeleteTransactionCommand = ReactiveCommand.Create(() => DeleteTransaction(), canDeleteTransaction);
-            var canSaveChangesCommand = this.WhenAny(x => x.Transactions,
-                (trans) => trans != null);
+            var canSaveChangesCommand = this.WhenAnyValue(x => x.ChangesMade,
+                (changes) => changes == true);
             SaveChangesCommand = ReactiveCommand.Create(() => SaveChanges(), canSaveChangesCommand);
-            Transactions = new ObservableCollection<Budget_Transactions>();
-            Transactions.CollectionChanged += Transactions_CollectionChanged;
+            Transactions = new ReactiveList<Transaction>();
+            Transactions.CollectionChanged += this.Transactions_CollectionChanged;
         }
-
         private void Transactions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
@@ -89,17 +94,34 @@ namespace Budget.ViewModels
                 }
             }
         }
-
+        internal void TransactionPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Transaction updatedTransaction = sender as Transaction;
+            updatedTransaction.PropertyChanged -= EditUserControlViewModel.GetInstance().TransactionPropertyChanged;
+            updatedTransaction.HasUpdated = true;
+            updatedTransaction.ModifiedDate = DateTimeHelper.PstNow();
+            updatedTransaction.PropertyChanged += EditUserControlViewModel.GetInstance().TransactionPropertyChanged;
+            ChangesMade = true;
+        }
         private void SaveChanges()
         {
-            throw new NotImplementedException();
+            foreach(Transaction transaction in Transactions)
+            {
+                if (transaction.HasUpdated)
+                {
+                    CarloniusRepository.UpdateTransaction(TransactionConverter.ConvertToBudget_Transaction(transaction));
+                    transaction.HasUpdated = false;
+                    ChangesMade = false;
+                    MessageBox.Show("Changes Saved Successfully!", "Transaction Update", MessageBoxButton.OK, MessageBoxImage.None);
+                }
+            }
+            
         }
         private void DeleteTransaction()
         {
-            CarloniusRepository.DeleteTransaction(SelectedTransaction);
+            CarloniusRepository.DeleteTransaction(TransactionConverter.ConvertToBudget_Transaction(SelectedTransaction));
             Transactions.Remove(SelectedTransaction);
         }
-
         private void HandleException(Exception ex)
         {
             Debug.WriteLine("Exception occurred {0}", ex.Message);
@@ -107,7 +129,7 @@ namespace Budget.ViewModels
         }
         private void UpdateTransactions(DateTime date)
         {
-            Transactions = CarloniusRepository.GetTransactionsByDateTime(date);
+            Transactions = TransactionConverter.ConvertToTransactions(CarloniusRepository.GetTransactionsByDateTime(date));
         }
         private void UpdateDate(DateTime? date)
         {
