@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="ViewModels\AddCategoryWindowViewModel.cs" />
     <Compile Include="ViewModels\AddUserControlViewModel.cs" />
+    <Compile Include="ViewModels\ViewUserControlViewModel.cs" />
     <Compile Include="ViewModels\EditUserControlViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\AddCategoryWindow.xaml.cs">

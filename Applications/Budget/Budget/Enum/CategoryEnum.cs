@@ -23,6 +23,16 @@ namespace Budget.Enum
         [Description("Shopping")]
         Shopping,
         [Description("Entertainment")]
-        Entertainment
+        Entertainment,
+        [Description("Coffee")]
+        Coffee,
+        [Description("Cleaners")]
+        Cleaners,
+        [Description("Travel")]
+        Travel,
+        [Description("Parking")]
+        Parking,
+        [Description("Haircut")]
+        Haircut
     }
 }

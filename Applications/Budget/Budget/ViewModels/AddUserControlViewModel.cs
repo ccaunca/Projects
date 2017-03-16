@@ -131,16 +131,20 @@ namespace Budget.ViewModels
         {
             return Observable.Start(() =>
             {
-                CarloniusRepository.AddTransaction(
-                    new Budget_Transactions
-                    {
-                        Amount = TransactionAmount,
-                        DateTime = DateTimeHelper.SetDateTime(Date, Time),
-                        Description = DescriptionText,
-                        CategoryID = (int)SelectedCategory,
-                        CreatedDate = DateTimeHelper.PstNow(),
-                        ModifiedDate = null
-                    });
+                Budget_Transactions newTransaction = new Budget_Transactions
+                {
+                    Amount = TransactionAmount,
+                    DateTime = DateTimeHelper.SetDateTime(Date, Time),
+                    Description = DescriptionText,
+                    CategoryID = (int)SelectedCategory,
+                    CreatedDate = DateTimeHelper.PstNow(),
+                    ModifiedDate = null
+                };
+                CarloniusRepository.AddTransaction(newTransaction);
+                if (DateTimeHelper.AreEqual(newTransaction.DateTime, Date))
+                {
+                    MainWindowViewModel.UpdateDataGrids(Date);
+                }
             });
         }
     }

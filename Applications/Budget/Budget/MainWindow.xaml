@@ -16,7 +16,8 @@
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Calendar Grid.Row="0" SelectionMode="{Binding SelectionMode}" SelectedDate="{Binding SelectedDate}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Calendar Grid.Row="0" SelectionMode="{Binding SelectionMode}" SelectedDate="{Binding SelectedDate}"
+                      HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <Grid Grid.Row="1">
                 <TabControl SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                     <TabItem Header="View" >

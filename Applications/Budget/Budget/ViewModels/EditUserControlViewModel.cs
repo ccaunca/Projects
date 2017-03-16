@@ -75,8 +75,13 @@ namespace Budget.ViewModels
                 (changes) => changes == true);
             SaveChangesCommand = ReactiveCommand.Create(() => SaveChanges(), canSaveChangesCommand);
             Transactions = new ReactiveList<Transaction>();
-            Transactions.CollectionChanged += this.Transactions_CollectionChanged;
+            Transactions.PropertyChanged += Transactions_PropertyChanged;
         }
+
+        private void Transactions_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+        }
+
         private void Transactions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
@@ -105,6 +110,7 @@ namespace Budget.ViewModels
         }
         private void SaveChanges()
         {
+            DateTime date = DateTimeHelper.PstNow();
             foreach(Transaction transaction in Transactions)
             {
                 if (transaction.HasUpdated)
@@ -113,9 +119,13 @@ namespace Budget.ViewModels
                     transaction.HasUpdated = false;
                     ChangesMade = false;
                     MessageBox.Show("Changes Saved Successfully!", "Transaction Update", MessageBoxButton.OK, MessageBoxImage.None);
+                    date = transaction.DateTime;
                 }
             }
-            
+            if (DateTimeHelper.AreEqual(date, Date))
+            {
+                UpdateTransactions(Date);
+            }
         }
         private void DeleteTransaction()
         {
@@ -127,7 +137,7 @@ namespace Budget.ViewModels
             Debug.WriteLine("Exception occurred {0}", ex.Message);
             throw ex;
         }
-        private void UpdateTransactions(DateTime date)
+        public void UpdateTransactions(DateTime date)
         {
             Transactions = TransactionConverter.ConvertToTransactions(CarloniusRepository.GetTransactionsByDateTime(date));
         }

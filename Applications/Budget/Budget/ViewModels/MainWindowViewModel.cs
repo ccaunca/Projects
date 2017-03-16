@@ -64,6 +64,12 @@ namespace Budget.ViewModels
             get { return _editUserControlViewModel; }
             set { this.RaiseAndSetIfChanged(ref _editUserControlViewModel, value); }
         }
+        private ViewUserControlViewModel _viewUserControlViewModel;
+        public ViewUserControlViewModel ViewUserControlViewModel
+        {
+            get { return _viewUserControlViewModel; }
+            set { this.RaiseAndSetIfChanged(ref _viewUserControlViewModel, value); }
+        }
         public IObservable<Nullable<DateTime>> SelectedDateObservable;
         public MainWindowViewModel()
         {
@@ -71,6 +77,8 @@ namespace Budget.ViewModels
             AddUserControlViewModel.Date = DateTimeHelper.PstNow();
             EditUserControlViewModel = EditUserControlViewModel.GetInstance();
             EditUserControlViewModel.Date = DateTimeHelper.PstNow();
+            ViewUserControlViewModel = ViewUserControlViewModel.GetInstance();
+            ViewUserControlViewModel.Date = DateTimeHelper.PstNow();
             IsViewMode = true;
             SelectedTabIndex = 0;
             SelectionMode = CalendarSelectionMode.SingleRange;
@@ -103,6 +111,7 @@ namespace Budget.ViewModels
             SelectedDateObservable.Subscribe(selectedDateObserver);
             SelectedDateObservable.Subscribe(AddUserControlViewModel.DateTimeObserver);
             SelectedDateObservable.Subscribe(EditUserControlViewModel.DateTimeObserver);
+            SelectedDateObservable.Subscribe(ViewUserControlViewModel.DateTimeObserver);
             tabSelection.Subscribe(updateRadioButton);
             SelectedDate = DateTimeHelper.PstNow();
         }
@@ -172,6 +181,10 @@ namespace Budget.ViewModels
         {
             Debug.WriteLine("{0}Mode completed", mode);
         }
+        /// <summary>
+        /// Used for debugging purposes
+        /// </summary>
+        /// <param name="selectedDate"></param>
         private void UpdateSelectedDate(Nullable<DateTime> selectedDate)
         {
             if (selectedDate.HasValue)
@@ -182,6 +195,11 @@ namespace Budget.ViewModels
             {
                 Debug.WriteLine("Selected Date is null");
             }
+        }
+        public static void UpdateDataGrids(DateTime date)
+        {
+            EditUserControlViewModel.GetInstance().UpdateTransactions(date);
+            ViewUserControlViewModel.GetInstance().UpdateTransactions(date);
         }
     }
 }

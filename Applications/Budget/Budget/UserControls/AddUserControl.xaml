@@ -35,21 +35,21 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="0.25*"/>
             <RowDefinition Height="0.35*"/>
+            <RowDefinition Height="0.25*"/>
+            <RowDefinition/>
             <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.35*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Description:"/>
-        <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" Text="{Binding DescriptionText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Time:"/>
+        <timepicker:TimePickerSlider Grid.Row="0" Grid.Column="1" Time="{Binding Time, Mode=TwoWay}" MinTime="{Binding MinTime}" MaxTime="{Binding MaxTime}"/>
         <Label Grid.Row="1" Grid.Column="0" Content="Amount:"/>
         <currency:CurrencyTextBox Grid.Row="1" Grid.Column="1" Number="{Binding TransactionAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <Label Grid.Row="2" Grid.Column="0" Content="Time:"/>
-        <timepicker:TimePickerSlider Grid.Row="2" Grid.Column="1" Time="{Binding Time, Mode=TwoWay}" MinTime="{Binding MinTime}" MaxTime="{Binding MaxTime}"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Description:"/>
+        <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" Text="{Binding DescriptionText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label Grid.Row="3" Grid.Column="0" Content="Category:"></Label>
         <Grid Grid.Row="3" Grid.Column="1">
             <Grid.ColumnDefinitions>

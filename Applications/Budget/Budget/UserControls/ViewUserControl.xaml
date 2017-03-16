@@ -4,9 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Budget.UserControls"
+             xmlns:c="clr-namespace:Budget.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <c:AmountConverter x:Key="amountConverter"/>
+    </UserControl.Resources>
     <Grid>
-      <DataGrid></DataGrid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height=".25*"/>
+        </Grid.RowDefinitions>
+      <DataGrid Grid.Row="0" CanUserDeleteRows="False" AutoGenerateColumns="False"
+                SelectedItem="{Binding SelectedTransaction, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ItemsSource="{Binding Transactions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date" Binding="{Binding DateTime}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Amount, Converter={StaticResource amountConverter}}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Created Date" Binding="{Binding CreatedDate}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+      </DataGrid>
     </Grid>
 </UserControl>
