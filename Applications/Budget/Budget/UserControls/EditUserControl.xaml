@@ -29,8 +29,19 @@
                 <DataGridTextColumn Header="Amount" Binding="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=LostFocus, Converter={StaticResource amountConverter}}"/>
                 <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridComboBoxColumn Width="100" Header="Category"
-                                        ItemsSource="{Binding Source={extensions:EnumBindingSource {x:Type enum:CategoryEnum}}}"
-                                        SelectedItemBinding="{Binding Category, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        SelectedValueBinding="{Binding CategoryID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        DisplayMemberPath="Category" SelectedValuePath="CategoryID">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Categories, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Categories, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
                 <DataGridTextColumn Header="CreatedDate" Binding="{Binding CreatedDate, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>

@@ -17,7 +17,7 @@ namespace Budget.Converter
                 {
                     TransactionID = transaction.TransactionID,
                     Amount = transaction.Amount,
-                    Category = (CategoryEnum)transaction.CategoryID,
+                    Category = Transaction.GetCategory(transaction.CategoryID),
                     CategoryID = transaction.CategoryID,
                     CreatedDate = transaction.CreatedDate,
                     DateTime = transaction.DateTime,
@@ -31,49 +31,12 @@ namespace Budget.Converter
             }
             return trans;
         }
-        private static CategoryEnum GetCategoryEnum(int categoryId)
-        {
-            CategoryEnum cat = CategoryEnum.Adventure;
-            switch(categoryId)
-            {
-                case 2:
-                    cat = CategoryEnum.DiningOut;
-                    break;
-                case 3:
-                    cat = CategoryEnum.Mortgage;
-                    break;
-                case 4:
-                    cat = CategoryEnum.Adventure;
-                    break;
-                case 5:
-                    cat = CategoryEnum.Gas;
-                    break;
-                case 6:
-                    cat = CategoryEnum.Gifts;
-                    break;
-                case 7:
-                    cat = CategoryEnum.Household;
-                    break;
-                case 8:
-                    cat = CategoryEnum.Shopping;
-                    break;
-                case 9:
-                    cat = CategoryEnum.Entertainment;
-                    break;
-                case 1:
-                default:
-                    cat = CategoryEnum.Groceries;
-                    break;
-            }
-            return cat;
-        }
-
         public static Budget_Transactions ConvertToBudget_Transaction(Transaction selectedTransaction)
         {
             return new Budget_Transactions
             {
                 Amount = selectedTransaction.Amount,
-                CategoryID = (int)selectedTransaction.Category,
+                CategoryID = selectedTransaction.CategoryID,
                 CreatedDate = selectedTransaction.CreatedDate,
                 DateTime = selectedTransaction.DateTime,
                 Description = selectedTransaction.Description,

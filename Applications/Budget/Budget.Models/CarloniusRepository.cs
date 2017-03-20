@@ -28,8 +28,26 @@ namespace Budget.Models
             {
                 HandleException(ex, "GetAllCategories");
             }
-            return categories;
+            return categories.OrderBy(c => c.Category).ToList();
         }
+
+        public static string GetCategoryByID(int categoryID)
+        {
+            string category = string.Empty;
+            try
+            {
+                using (var context = new CarloniusEntities())
+                {
+                    category = context.Budget_Categories.FirstOrDefault(c => c.CategoryID == categoryID).Category;
+                }
+            }
+            catch(Exception ex)
+            {
+                HandleException(ex, "GetCategoryByID");
+            }
+            return category;
+        }
+
         public static Budget_Categories GetCategory(string category)
         {
             Budget_Categories cat = null;

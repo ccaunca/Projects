@@ -28,8 +28,14 @@ namespace Budget.ViewModels
         {
             CarloniusRepository.InsertCategory(new Budget_Categories { Category = NewCategoryText, DateTime = DateTimeHelper.PstNow() });
             MessageBox.Show("Add Successful!", "Category Add", MessageBoxButton.OK, MessageBoxImage.None);
-            AddUserControlViewModel addVM = AddUserControlViewModel.GetInstance();
-            addVM.GetAllCategories();
+            PushCategories();
+            
+        }
+        private void PushCategories()
+        {
+            AddUserControlViewModel.GetInstance().GetAllCategories();
+            EditUserControlViewModel.GetInstance().GetAllCategories();
+            ViewUserControlViewModel.GetInstance().UpdateTransactions(ViewUserControlViewModel.GetInstance().Date);
         }
     }
 }

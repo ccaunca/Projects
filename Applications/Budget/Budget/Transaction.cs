@@ -2,13 +2,14 @@
 using System.ComponentModel;
 using Budget.Enum;
 using ReactiveUI;
+using Budget.Models;
 
 namespace Budget
 {
     public class Transaction : ReactiveObject
     {
-        private CategoryEnum _category;
-        public CategoryEnum Category
+        private string _category;
+        public string Category
         {
             get { return _category; }
             set { this.RaiseAndSetIfChanged(ref _category, value); }
@@ -25,6 +26,12 @@ namespace Budget
             get { return _dateTime; }
             set { this.RaiseAndSetIfChanged(ref _dateTime, value); }
         }
+
+        internal static string GetCategory(int categoryID)
+        {
+            return CarloniusRepository.GetCategoryByID(categoryID);
+        }
+
         private decimal _amount;
         public decimal Amount
         {

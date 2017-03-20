@@ -61,8 +61,8 @@ namespace Budget.ViewModels
             get { return _categories; }
             set { this.RaiseAndSetIfChanged(ref _categories, value); }
         }
-        private CategoryEnum _selectedCategory;
-        public CategoryEnum SelectedCategory
+        private string _selectedCategory;
+        public string SelectedCategory
         {
             get { return _selectedCategory; }
             set { this.RaiseAndSetIfChanged(ref _selectedCategory, value); }
@@ -136,7 +136,7 @@ namespace Budget.ViewModels
                     Amount = TransactionAmount,
                     DateTime = DateTimeHelper.SetDateTime(Date, Time),
                     Description = DescriptionText,
-                    CategoryID = (int)SelectedCategory,
+                    CategoryID = GetCategoryId(SelectedCategory),
                     CreatedDate = DateTimeHelper.PstNow(),
                     ModifiedDate = null
                 };
@@ -146,6 +146,12 @@ namespace Budget.ViewModels
                     MainWindowViewModel.UpdateDataGrids(Date);
                 }
             });
+        }
+
+        private int GetCategoryId(string selectedCategory)
+        {
+            int categoryId = Categories.Find(x => x.Category == selectedCategory).CategoryID;
+            return categoryId;
         }
     }
 }

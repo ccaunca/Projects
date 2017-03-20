@@ -57,12 +57,18 @@ namespace Budget.ViewModels
             get { return _changesMade; }
             set { this.RaiseAndSetIfChanged(ref _changesMade, value); }
         }
+        private string _selectedCategory;
+        public string SelectedCategory
+        {
+            get { return _selectedCategory; }
+            set { this.RaiseAndSetIfChanged(ref _selectedCategory, value); }
+        }
         public ReactiveCommand DeleteTransactionCommand { get; private set; }
         public ReactiveCommand SaveChangesCommand { get; private set; }
         public IObserver<Nullable<DateTime>> DateTimeObserver;
         private EditUserControlViewModel()
         {
-            Categories = CarloniusRepository.GetAllCategories();
+            GetAllCategories();
             DateTimeObserver = Observer.Create<Nullable<DateTime>>(
                 date => UpdateDate(date),
                 ex => HandleException(ex),
@@ -111,6 +117,7 @@ namespace Budget.ViewModels
         private void SaveChanges()
         {
             DateTime date = DateTimeHelper.PstNow();
+            int changeSuccessCount = 0;
             foreach(Transaction transaction in Transactions)
             {
                 if (transaction.HasUpdated)
@@ -118,10 +125,11 @@ namespace Budget.ViewModels
                     CarloniusRepository.UpdateTransaction(TransactionConverter.ConvertToBudget_Transaction(transaction));
                     transaction.HasUpdated = false;
                     ChangesMade = false;
-                    MessageBox.Show("Changes Saved Successfully!", "Transaction Update", MessageBoxButton.OK, MessageBoxImage.None);
                     date = transaction.DateTime;
+                    changeSuccessCount++;
                 }
             }
+            MessageBox.Show(string.Format("{0} Change(s) Saved Successfully!", changeSuccessCount), "Transaction Update", MessageBoxButton.OK, MessageBoxImage.None);
             if (DateTimeHelper.AreEqual(date, Date))
             {
                 UpdateTransactions(Date);
@@ -148,6 +156,10 @@ namespace Budget.ViewModels
                 Date = date.Value;
                 UpdateTransactions(Date);
             }
+        }
+        public void GetAllCategories()
+        {
+            Categories = CarloniusRepository.GetAllCategories();
         }
     }
 }
