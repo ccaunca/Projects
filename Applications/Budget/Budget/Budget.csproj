@@ -113,6 +113,7 @@
     <Compile Include="Converter\TransactionConverter.cs" />
     <Compile Include="Enum\CalendarModeEnum.cs" />
     <Compile Include="Base\CalendarViewMode.cs" />
+    <Compile Include="Extensions\CalendarExtension.cs" />
     <Compile Include="Extensions\EnumBindingSourceExtension.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Transaction.cs" />

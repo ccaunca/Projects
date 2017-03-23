@@ -7,6 +7,7 @@
         xmlns:vm="clr-namespace:Budget.ViewModels"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:uc="clr-namespace:Budget.UserControls"
+        xmlns:e ="clr-namespace:Budget.Extensions"
         mc:Ignorable="d"
         Title="Budget" Height="575" Width="600"
         Icon="Images\Purse.ico">
@@ -16,8 +17,10 @@
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Calendar Grid.Row="0" SelectionMode="{Binding SelectionMode}" SelectedDate="{Binding SelectedDate}"
-                      HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Calendar Grid.Row="0" SelectionMode="{Binding SelectionMode}" SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      HorizontalAlignment="Center" VerticalAlignment="Top"
+                      e:CalendarExtensions.SelectedDates="{Binding SelectedDates, Mode=TwoWay}"
+                      e:CalendarExtensions.TrackCalendarSelectedDates="True"/>
             <Grid Grid.Row="1">
                 <TabControl SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                     <TabItem Header="View" >
