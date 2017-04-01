@@ -79,50 +79,29 @@ namespace Budget.ViewModels
         }
         public IObservable<Nullable<DateTime>> SelectedDateObservable;
         public IObservable<IEnumerable<DateTime>> SelectedDatesObservable;
-
-
-        public MainWindowViewModel()
+        private static MainWindowViewModel _instance;
+        public static MainWindowViewModel GetInstance()
+        {
+            if (_instance == null)
+                _instance = new MainWindowViewModel();
+            return _instance;
+        }
+        private MainWindowViewModel()
         {
             AddUserControlViewModel = AddUserControlViewModel.GetInstance();
             AddUserControlViewModel.Date = DateTimeHelper.PstNow();
             EditUserControlViewModel = EditUserControlViewModel.GetInstance();
             EditUserControlViewModel.Date = DateTimeHelper.PstNow();
             ViewUserControlViewModel = ViewUserControlViewModel.GetInstance();
-            ViewUserControlViewModel.Date = DateTimeHelper.PstNow();
-            IsViewMode = true;
+            ViewUserControlViewModel.Dates = new List<DateTime> { DateTimeHelper.PstNow() };
             SelectedTabIndex = 0;
             SelectionMode = CalendarSelectionMode.SingleRange;
-            IObservable<bool> viewMode = this.WhenAnyValue(x => x.IsViewMode);
-            IObservable<bool> editMode = this.WhenAnyValue(x => x.IsEditMode);
-            IObservable<bool> addMode = this.WhenAnyValue(x => x.IsAddMode);
             IObservable<int> tabSelection = this.WhenAnyValue(x => x.SelectedTabIndex);
             SelectedDateObservable = this.WhenAnyValue(x => x.SelectedDate);
-            SelectedDatesObservable = this.WhenAnyValue(x => x.SelectedDates);
-            IObserver<bool> viewModeObserver = Observer.Create<bool>(
-                isChecked => ModeUpdate(CalendarModeEnum.View, isChecked),
-                ex => HandleError(CalendarModeEnum.View, ex.Message),
-                () => OnCompleted(CalendarModeEnum.View));
-            IObserver<bool> editModeObserver = Observer.Create<bool>(
-                isChecked => ModeUpdate(CalendarModeEnum.Edit, isChecked),
-                ex => HandleError(CalendarModeEnum.Edit, ex.Message),
-                () => OnCompleted(CalendarModeEnum.Edit));
-            IObserver<bool> addModeObserver = Observer.Create<bool>(
-                isChecked => ModeUpdate(CalendarModeEnum.Add, isChecked),
-                ex => HandleError(CalendarModeEnum.Add, ex.Message),
-                () => OnCompleted(CalendarModeEnum.Add));
             IObserver<int> updateRadioButton = Observer.Create<int>(
                 tabIndex => UpdateRadioButtonSelection(tabIndex));
-            IObserver<IEnumerable<DateTime>> selectedDatesObserver = Observer.Create<IEnumerable<DateTime>>(
-                dates => UpdateSelectedDates(dates),
-                ex => Debug.WriteLine("selectedDateObserver OnError {0}", ex.Message),
-                () => Debug.WriteLine("selectedDateObserver OnCompleted"));
-            viewMode.Subscribe(viewModeObserver);
-            editMode.Subscribe(editModeObserver);
-            addMode.Subscribe(addModeObserver);
-            SelectedDatesObservable.Subscribe(selectedDatesObserver);
             SelectedDateObservable.Subscribe(AddUserControlViewModel.DateTimeObserver);
             SelectedDateObservable.Subscribe(EditUserControlViewModel.DateTimeObserver);
-            SelectedDateObservable.Subscribe(ViewUserControlViewModel.DateTimeObserver);
             tabSelection.Subscribe(updateRadioButton);
             SelectedDate = DateTimeHelper.PstNow();
         }
@@ -196,21 +175,10 @@ namespace Budget.ViewModels
         {
             Debug.WriteLine("{0}Mode completed", mode);
         }
-        /// <summary>
-        /// Used for debugging purposes
-        /// </summary>
-        /// <param name="selectedDate"></param>
-        private void UpdateSelectedDates(IEnumerable<DateTime> selectedDates)
-        {
-            if (selectedDates != null)
-            {
-                
-            }
-        }
         public static void UpdateDataGrids(DateTime date)
         {
             EditUserControlViewModel.GetInstance().UpdateTransactions(date);
-            ViewUserControlViewModel.GetInstance().UpdateTransactions(date);
+            ViewUserControlViewModel.GetInstance().UpdateTransactions(new List<DateTime> { date });
         }
     }
 }

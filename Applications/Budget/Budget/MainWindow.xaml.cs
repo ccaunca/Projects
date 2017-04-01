@@ -13,7 +13,7 @@ namespace Budget
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+            DataContext = MainWindowViewModel.GetInstance();
         }
     }
 }

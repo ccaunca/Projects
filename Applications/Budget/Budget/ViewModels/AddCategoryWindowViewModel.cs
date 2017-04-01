@@ -35,7 +35,7 @@ namespace Budget.ViewModels
         {
             AddUserControlViewModel.GetInstance().GetAllCategories();
             EditUserControlViewModel.GetInstance().GetAllCategories();
-            ViewUserControlViewModel.GetInstance().UpdateTransactions(ViewUserControlViewModel.GetInstance().Date);
+            ViewUserControlViewModel.GetInstance().UpdateTransactions(ViewUserControlViewModel.GetInstance().Dates);
         }
     }
 }

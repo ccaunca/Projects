@@ -9,6 +9,7 @@ namespace Budget.Models
 {
     public class CarloniusRepository
     {
+        public static DateTimeComparer DateTimeComparator = new DateTimeComparer();
         public static List<Budget_GetAllCategories_Result> GetAllCategories()
         {
             List<Budget_GetAllCategories_Result> categories = new List<Budget_GetAllCategories_Result>();
@@ -78,6 +79,29 @@ namespace Budget.Models
             {
                 HandleException(ex, "InsertCategory");
             }
+        }
+        public static ObservableCollection<Budget_Transactions> GetTransactionsByDateTimes(IEnumerable<DateTime> dates)
+        {
+            ObservableCollection<Budget_Transactions> transactions = new ObservableCollection<Budget_Transactions>();
+            try
+            {
+                using (var context = new CarloniusEntities())
+                {   // TODO: Implement TVP
+                    //var results =
+                    //    from t in context.Budget_Transactions
+                    //    where t.DateTime
+                    //    select t;
+                    //foreach (var result in results)
+                    //{
+                    //    transactions.Add(result);
+                    //}
+                }
+            }
+            catch(Exception ex)
+            {
+                HandleException(ex, "GetTransactionsByDateTimes");
+            }
+            return transactions;
         }
         public static ObservableCollection<Budget_Transactions> GetTransactionsByDateTime(DateTime datetime)
         {

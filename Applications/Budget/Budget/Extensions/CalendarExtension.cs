@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Budget.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -100,6 +101,7 @@ namespace Budget.Extensions
             {
                 updatingSelectedDates = true;
                 SetSelectedDates(_calendar, _calendar.SelectedDates);
+                ViewUserControlViewModel.GetInstance().UpdateTransactions(_calendar.SelectedDates);
                 Debug.WriteLine("Selected Dates are:");
                 foreach (DateTime selectedDate in _calendar.SelectedDates)
                 {

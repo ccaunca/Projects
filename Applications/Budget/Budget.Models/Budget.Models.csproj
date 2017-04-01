@@ -76,6 +76,7 @@
       <DependentUpon>CarloniusModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="CarloniusRepository.cs" />
+    <Compile Include="DateTimeComparer.cs" />
     <Compile Include="GetTransactionsByDateTime_Result.cs">
       <DependentUpon>CarloniusModel.tt</DependentUpon>
     </Compile>
