@@ -25,6 +25,29 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Carlonius.dbo.TransactionsDatesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TransactionsDatesView">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+            <PropertyRef Name="DateTime" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="DateTimeLookupId" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="TransactionID" Type="int" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="DateTimeLookupId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Categories_CategoryID">
           <End Role="Budget_Categories" Type="Self.Budget_Categories" Multiplicity="1" />
           <End Role="Budget_Transactions" Type="Self.Budget_Transactions" Multiplicity="*" />
@@ -44,6 +67,19 @@
         <EntityContainer Name="CarloniusModelStoreContainer">
           <EntitySet Name="Budget_Categories" EntityType="Self.Budget_Categories" Schema="dbo" Table="Budget.Categories" store:Type="Tables" />
           <EntitySet Name="Budget_Transactions" EntityType="Self.Budget_Transactions" Schema="dbo" Table="Budget.Transactions" store:Type="Tables" />
+          <EntitySet Name="TransactionsDatesView" EntityType="Self.TransactionsDatesView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TransactionsDatesView].[TransactionID] AS [TransactionID], 
+    [TransactionsDatesView].[DateTime] AS [DateTime], 
+    [TransactionsDatesView].[Amount] AS [Amount], 
+    [TransactionsDatesView].[Description] AS [Description], 
+    [TransactionsDatesView].[CategoryID] AS [CategoryID], 
+    [TransactionsDatesView].[CreatedDate] AS [CreatedDate], 
+    [TransactionsDatesView].[ModifiedDate] AS [ModifiedDate], 
+    [TransactionsDatesView].[DateTimeLookupId] AS [DateTimeLookupId], 
+    [TransactionsDatesView].[Date] AS [Date]
+    FROM [dbo].[TransactionsDatesView] AS [TransactionsDatesView]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Categories_CategoryID" Association="Self.FK_Categories_CategoryID">
             <End Role="Budget_Categories" EntitySet="Budget_Categories" />
             <End Role="Budget_Transactions" EntitySet="Budget_Transactions" />
@@ -99,6 +135,7 @@
           <Parameter Name="DateTime" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GetTransactionsByDateTimesTVP" EntitySet="Budget_Transactions" ReturnType="Collection(CarloniusModel.Budget_Transactions)" />
+          <EntitySet Name="TransactionsDatesViews" EntityType="CarloniusModel.TransactionsDatesView" />
         </EntityContainer>
         <ComplexType Name="Budget_GetAllCategories_Result">
           <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
@@ -112,6 +149,27 @@
           <Property Type="Int32" Name="CategoryID" Nullable="false" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
         </ComplexType>
+        <EntityType Name="TransactionsDatesView">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+            <PropertyRef Name="DateTime" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="DateTimeLookupId" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="TransactionID" Type="Int32" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="DateTimeLookupId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -160,6 +218,21 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="TransactionsDatesViews">
+            <EntityTypeMapping TypeName="CarloniusModel.TransactionsDatesView">
+              <MappingFragment StoreEntitySet="TransactionsDatesView">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DateTimeLookupId" ColumnName="DateTimeLookupId" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
