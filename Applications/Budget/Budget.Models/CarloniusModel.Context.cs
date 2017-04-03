@@ -43,5 +43,15 @@ namespace Budget.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTransactionsByDateTime_Result>("GetTransactionsByDateTime", dateTimeParameter);
         }
+    
+        public virtual ObjectResult<Budget_Transactions> GetTransactionsByDateTimesTVP()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Budget_Transactions>("GetTransactionsByDateTimesTVP");
+        }
+    
+        public virtual ObjectResult<Budget_Transactions> GetTransactionsByDateTimesTVP(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Budget_Transactions>("GetTransactionsByDateTimesTVP", mergeOption);
+        }
     }
 }

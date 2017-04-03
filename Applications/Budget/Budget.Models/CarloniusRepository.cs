@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Data.Entity.Core.Objects;
 using System.Diagnostics;
 using System.Linq;
@@ -9,7 +10,6 @@ namespace Budget.Models
 {
     public class CarloniusRepository
     {
-        public static DateTimeComparer DateTimeComparator = new DateTimeComparer();
         public static List<Budget_GetAllCategories_Result> GetAllCategories()
         {
             List<Budget_GetAllCategories_Result> categories = new List<Budget_GetAllCategories_Result>();
@@ -85,17 +85,14 @@ namespace Budget.Models
             ObservableCollection<Budget_Transactions> transactions = new ObservableCollection<Budget_Transactions>();
             try
             {
-                using (var context = new CarloniusEntities())
-                {   // TODO: Implement TVP
-                    //var results =
-                    //    from t in context.Budget_Transactions
-                    //    where t.DateTime
-                    //    select t;
-                    //foreach (var result in results)
-                    //{
-                    //    transactions.Add(result);
-                    //}
+                foreach(var date in dates)
+                {
+                    foreach (var transaction in GetTransactionsByDateTime(date))
+                    {
+                        transactions.Add(transaction);
+                    }
                 }
+
             }
             catch(Exception ex)
             {

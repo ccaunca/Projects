@@ -19,7 +19,7 @@
             </Grid.RowDefinitions>
             <Calendar Grid.Row="0" SelectionMode="{Binding SelectionMode}" SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       HorizontalAlignment="Center" VerticalAlignment="Top"
-                      e:CalendarExtensions.SelectedDates="{Binding SelectedDates, Mode=TwoWay}"
+                      e:CalendarExtensions.SelectedDates="{Binding SelectedDates, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       e:CalendarExtensions.TrackCalendarSelectedDates="True"/>
             <Grid Grid.Row="1">
                 <TabControl SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >

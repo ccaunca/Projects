@@ -98,6 +98,7 @@
           <FunctionImport Name="GetTransactionsByDateTime" ReturnType="Collection(CarloniusModel.GetTransactionsByDateTime_Result)">
           <Parameter Name="DateTime" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="GetTransactionsByDateTimesTVP" EntitySet="Budget_Transactions" ReturnType="Collection(CarloniusModel.Budget_Transactions)" />
         </EntityContainer>
         <ComplexType Name="Budget_GetAllCategories_Result">
           <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
