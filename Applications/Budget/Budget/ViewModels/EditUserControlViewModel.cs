@@ -4,7 +4,6 @@ using Budget.Models;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Reactive;
@@ -14,58 +13,52 @@ namespace Budget.ViewModels
 {
     public class EditUserControlViewModel : ReactiveObject
     {
+        private static EditUserControlViewModel _instance;
         private ReactiveList<Transaction> _transactions;
+        private DateTime _date;
+        private List<Budget_GetAllCategories_Result> _categories;
+        private Transaction _selectedTransaction;
+        private int _selectedCategoryIndex;
+        private bool _changesMade;
         public ReactiveList<Transaction> Transactions
         {
             get { return _transactions; }
             set { this.RaiseAndSetIfChanged(ref _transactions, value); }
         }
-        private static EditUserControlViewModel _instance;
+        public DateTime Date
+        {
+            get { return _date; }
+            set { this.RaiseAndSetIfChanged(ref _date, value); }
+        }
+        public List<Budget_GetAllCategories_Result> Categories
+        {
+            get { return _categories; }
+            set { this.RaiseAndSetIfChanged(ref _categories, value); }
+        }
+        public Transaction SelectedTransaction
+        {
+            get { return _selectedTransaction; }
+            set { this.RaiseAndSetIfChanged(ref _selectedTransaction, value); }
+        }
+        public int SelectedCategoryIndex
+        {
+            get { return _selectedCategoryIndex; }
+            set { this.RaiseAndSetIfChanged(ref _selectedCategoryIndex, value); }
+        }
+        public bool ChangesMade
+        {
+            get { return _changesMade; }
+            set { this.RaiseAndSetIfChanged(ref _changesMade, value); }
+        }
+        public ReactiveCommand DeleteTransactionCommand { get; private set; }
+        public ReactiveCommand SaveChangesCommand { get; private set; }
+        public IObserver<Nullable<DateTime>> DateTimeObserver;
         public static EditUserControlViewModel GetInstance()
         {
             if (_instance == null)
                 _instance = new EditUserControlViewModel();
             return _instance;
         }
-        private DateTime _date;
-        public DateTime Date
-        {
-            get { return _date; }
-            set { this.RaiseAndSetIfChanged(ref _date, value); }
-        }
-        private List<Budget_GetAllCategories_Result> _categories;
-        public List<Budget_GetAllCategories_Result> Categories
-        {
-            get { return _categories; }
-            set { this.RaiseAndSetIfChanged(ref _categories, value); }
-        }
-        private Transaction _selectedTransaction;
-        public Transaction SelectedTransaction
-        {
-            get { return _selectedTransaction; }
-            set { this.RaiseAndSetIfChanged(ref _selectedTransaction, value); }
-        }
-        private int _selectedCategoryIndex;
-        public int SelectedCategoryIndex
-        {
-            get { return _selectedCategoryIndex; }
-            set { this.RaiseAndSetIfChanged(ref _selectedCategoryIndex, value); }
-        }
-        private bool _changesMade;
-        public bool ChangesMade
-        {
-            get { return _changesMade; }
-            set { this.RaiseAndSetIfChanged(ref _changesMade, value); }
-        }
-        private string _selectedCategory;
-        public string SelectedCategory
-        {
-            get { return _selectedCategory; }
-            set { this.RaiseAndSetIfChanged(ref _selectedCategory, value); }
-        }
-        public ReactiveCommand DeleteTransactionCommand { get; private set; }
-        public ReactiveCommand SaveChangesCommand { get; private set; }
-        public IObserver<Nullable<DateTime>> DateTimeObserver;
         private EditUserControlViewModel()
         {
             GetAllCategories();
@@ -81,29 +74,6 @@ namespace Budget.ViewModels
                 (changes) => changes == true);
             SaveChangesCommand = ReactiveCommand.Create(() => SaveChanges(), canSaveChangesCommand);
             Transactions = new ReactiveList<Transaction>();
-            Transactions.PropertyChanged += Transactions_PropertyChanged;
-        }
-
-        private void Transactions_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-        }
-
-        private void Transactions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach(var item in e.NewItems)
-                {
-
-                }
-            }
-            if (e.OldItems != null)
-            {
-                foreach(var item in e.OldItems)
-                {
-
-                }
-            }
         }
         internal void TransactionPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

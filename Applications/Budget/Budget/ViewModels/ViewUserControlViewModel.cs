@@ -4,7 +4,6 @@ using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Reactive;
 
 namespace Budget.ViewModels
 {
@@ -14,6 +13,7 @@ namespace Budget.ViewModels
         private static ViewUserControlViewModel _instance;
         private IEnumerable<DateTime> _dates;
         private Transaction _selectedTransaction;
+        private decimal _amountTotal;
         public ReactiveList<Transaction> Transactions
         {
             get { return _transactions; }
@@ -28,6 +28,11 @@ namespace Budget.ViewModels
         {
             get { return _selectedTransaction; }
             set { this.RaiseAndSetIfChanged(ref _selectedTransaction, value); }
+        }
+        public decimal AmountTotal
+        {
+            get { return _amountTotal; }
+            set { this.RaiseAndSetIfChanged(ref _amountTotal, value); }
         }
         public IObserver<IEnumerable<DateTime>> DateTimeObserver;
         public static ViewUserControlViewModel GetInstance()
@@ -48,6 +53,7 @@ namespace Budget.ViewModels
         public void UpdateTransactions(IEnumerable<DateTime> dates)
         {
             Transactions = TransactionConverter.ConvertToTransactions(CarloniusRepository.GetTransactionsByDateTimes(dates));
+            AmountTotal = CalculateTotal();
         }
         private void UpdateDates(IEnumerable<DateTime> dates)
         {
@@ -56,6 +62,15 @@ namespace Budget.ViewModels
                 Dates = dates;
                 UpdateTransactions(Dates);
             }
+        }
+        private decimal CalculateTotal()
+        {
+            decimal total = 0;
+            foreach(var transaction in Transactions)
+            {
+                total += transaction.Amount;
+            }
+            return total;
         }
         private void HandleException(Exception ex)
         {

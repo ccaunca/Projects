@@ -15,9 +15,9 @@
             <RowDefinition/>
             <RowDefinition Height=".25*"/>
         </Grid.RowDefinitions>
-      <DataGrid Grid.Row="0" CanUserDeleteRows="False" AutoGenerateColumns="False"
-                SelectedItem="{Binding SelectedTransaction, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                ItemsSource="{Binding Transactions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <DataGrid Grid.Row="0" CanUserDeleteRows="False" AutoGenerateColumns="False"
+                  SelectedItem="{Binding SelectedTransaction, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Transactions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Binding="{Binding DateTime}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Amount" Binding="{Binding Amount, Converter={StaticResource amountConverter}}" IsReadOnly="True"/>
@@ -25,6 +25,18 @@
                 <DataGridTextColumn Header="Category" Binding="{Binding Category}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Created Date" Binding="{Binding CreatedDate}" IsReadOnly="True"/>
             </DataGrid.Columns>
-      </DataGrid>
+        </DataGrid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label FontWeight="ExtraBold" Grid.Column="0" Grid.Row="0" Content="Total:"/>
+            <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding AmountTotal, Converter={StaticResource amountConverter}}"></TextBox>
+        </Grid>
     </Grid>
 </UserControl>

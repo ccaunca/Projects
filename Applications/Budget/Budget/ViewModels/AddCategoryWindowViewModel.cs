@@ -7,11 +7,11 @@ namespace Budget.ViewModels
 {
     public class AddCategoryWindowViewModel : ReactiveObject
     {
-        private string _category;
+        private string _newCategoryText;
         public string NewCategoryText
         {
-            get { return _category; }
-            set { this.RaiseAndSetIfChanged(ref _category, value); }
+            get { return _newCategoryText; }
+            set { this.RaiseAndSetIfChanged(ref _newCategoryText, value); }
         }
         public ReactiveCommand AddCategoryCommand { get; private set; }
         public AddCategoryWindowViewModel()
