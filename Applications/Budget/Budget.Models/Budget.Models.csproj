@@ -81,6 +81,9 @@
       <DependentUpon>CarloniusModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransactionsDatesView.cs">
+      <DependentUpon>CarloniusModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="CarloniusModel.edmx">

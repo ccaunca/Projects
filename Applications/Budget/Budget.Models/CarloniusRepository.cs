@@ -85,14 +85,27 @@ namespace Budget.Models
             ObservableCollection<Budget_Transactions> transactions = new ObservableCollection<Budget_Transactions>();
             try
             {
-                foreach(var date in dates)
+                using (var context = new CarloniusEntities())
                 {
-                    foreach (var transaction in GetTransactionsByDateTime(date))
+                    List<TransactionsDatesView> transactionsView = context.TransactionsDatesViews
+                        .Where(trans => dates.Contains(trans.Date)).ToList();
+                    List<Budget_Transactions> budgetTransactionList = transactionsView
+                        .Select(trans => new Budget_Transactions()
+                        {
+                            Amount = trans.Amount,
+                            CategoryID = trans.CategoryID,
+                            CreatedDate = trans.CreatedDate,
+                            DateTime = trans.DateTime,
+                            Description = trans.Description,
+                            ModifiedDate = trans.ModifiedDate,
+                            TransactionID = trans.TransactionID
+                        })
+                        .ToList();
+                    foreach(var trans in budgetTransactionList)
                     {
-                        transactions.Add(transaction);
+                        transactions.Add(trans);
                     }
                 }
-
             }
             catch(Exception ex)
             {

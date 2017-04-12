@@ -29,6 +29,7 @@ namespace Budget.Models
     
         public virtual DbSet<Budget_Categories> Budget_Categories { get; set; }
         public virtual DbSet<Budget_Transactions> Budget_Transactions { get; set; }
+        public virtual DbSet<TransactionsDatesView> TransactionsDatesViews { get; set; }
     
         public virtual ObjectResult<Budget_GetAllCategories_Result> Budget_GetAllCategories()
         {
