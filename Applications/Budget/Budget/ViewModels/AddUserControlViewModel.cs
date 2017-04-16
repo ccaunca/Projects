@@ -127,15 +127,17 @@ namespace Budget.ViewModels
         {
             return Observable.Start(() =>
             {
+                DateTime newDateTime = DateTimeHelper.SetDateTime(Date, Time);
                 Budget_Transactions newTransaction = new Budget_Transactions
                 {
                     Amount = TransactionAmount,
-                    DateTime = DateTimeHelper.SetDateTime(Date, Time),
+                    DateTime = newDateTime,
                     Description = DescriptionText,
                     CategoryID = GetCategoryId(SelectedCategory),
                     CreatedDate = DateTimeHelper.PstNow(),
                     ModifiedDate = null
                 };
+                CarloniusRepository.AddDateTimeLookup(newDateTime);
                 CarloniusRepository.AddTransaction(newTransaction);
                 if (DateTimeHelper.AreEqual(newTransaction.DateTime, Date))
                 {

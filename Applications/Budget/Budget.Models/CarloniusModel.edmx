@@ -13,6 +13,13 @@
           <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="Budget_DateTimeLookup">
+          <Key>
+            <PropertyRef Name="DateTimeLookupId" />
+          </Key>
+          <Property Name="DateTimeLookupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateTime" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="Budget_Transactions">
           <Key>
             <PropertyRef Name="TransactionID" />
@@ -66,6 +73,7 @@ warning 6002: The table/view 'Carlonius.dbo.TransactionsDatesView' does not have
         </Function>
         <EntityContainer Name="CarloniusModelStoreContainer">
           <EntitySet Name="Budget_Categories" EntityType="Self.Budget_Categories" Schema="dbo" Table="Budget.Categories" store:Type="Tables" />
+          <EntitySet Name="Budget_DateTimeLookup" EntityType="Self.Budget_DateTimeLookup" Schema="dbo" Table="Budget.DateTimeLookup" store:Type="Tables" />
           <EntitySet Name="Budget_Transactions" EntityType="Self.Budget_Transactions" Schema="dbo" Table="Budget.Transactions" store:Type="Tables" />
           <EntitySet Name="TransactionsDatesView" EntityType="Self.TransactionsDatesView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -136,6 +144,7 @@ warning 6002: The table/view 'Carlonius.dbo.TransactionsDatesView' does not have
           </FunctionImport>
           <FunctionImport Name="GetTransactionsByDateTimesTVP" EntitySet="Budget_Transactions" ReturnType="Collection(CarloniusModel.Budget_Transactions)" />
           <EntitySet Name="TransactionsDatesViews" EntityType="CarloniusModel.TransactionsDatesView" />
+          <EntitySet Name="Budget_DateTimeLookup" EntityType="CarloniusModel.Budget_DateTimeLookup" />
         </EntityContainer>
         <ComplexType Name="Budget_GetAllCategories_Result">
           <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
@@ -169,6 +178,13 @@ warning 6002: The table/view 'Carlonius.dbo.TransactionsDatesView' does not have
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="DateTimeLookupId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Budget_DateTimeLookup">
+          <Key>
+            <PropertyRef Name="DateTimeLookupId" />
+          </Key>
+          <Property Name="DateTimeLookupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -230,6 +246,14 @@ warning 6002: The table/view 'Carlonius.dbo.TransactionsDatesView' does not have
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Budget_DateTimeLookup">
+            <EntityTypeMapping TypeName="CarloniusModel.Budget_DateTimeLookup">
+              <MappingFragment StoreEntitySet="Budget_DateTimeLookup">
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="DateTimeLookupId" ColumnName="DateTimeLookupId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

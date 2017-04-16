@@ -54,6 +54,9 @@
     <Compile Include="Budget_Categories.cs">
       <DependentUpon>CarloniusModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Budget_DateTimeLookup.cs">
+      <DependentUpon>CarloniusModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Budget_GetAllCategories_Result.cs">
       <DependentUpon>CarloniusModel.tt</DependentUpon>
     </Compile>

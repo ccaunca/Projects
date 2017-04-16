@@ -10,6 +10,26 @@ namespace Budget.Models
 {
     public class CarloniusRepository
     {
+        public static void AddDateTimeLookup(DateTime date)
+        {
+            try
+            {
+                using (var context = new CarloniusEntities())
+                {
+                    DateTime shortDate = GetDateTime(date);
+                    Budget_DateTimeLookup lookup = context.Budget_DateTimeLookup.FirstOrDefault(l => l.DateTime.Equals(shortDate));
+                    if (lookup == null)
+                    {
+                        context.Budget_DateTimeLookup.Add(new Budget_DateTimeLookup { DateTime = shortDate });
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex, "AddDateTimeLookup");
+            }
+        }
         public static List<Budget_GetAllCategories_Result> GetAllCategories()
         {
             List<Budget_GetAllCategories_Result> categories = new List<Budget_GetAllCategories_Result>();
@@ -31,7 +51,6 @@ namespace Budget.Models
             }
             return categories.OrderBy(c => c.Category).ToList();
         }
-
         public static string GetCategoryByID(int categoryID)
         {
             string category = string.Empty;
@@ -48,7 +67,6 @@ namespace Budget.Models
             }
             return category;
         }
-
         public static Budget_Categories GetCategory(string category)
         {
             Budget_Categories cat = null;
@@ -120,19 +138,23 @@ namespace Budget.Models
             {
                 using (var context = new CarloniusEntities())
                 {
-                    ObjectResult<GetTransactionsByDateTime_Result> resultSet = context.GetTransactionsByDateTime(GetDateTime(datetime));
-                    List<GetTransactionsByDateTime_Result> resultList = (from trans in resultSet select trans).ToList();
-                    foreach(GetTransactionsByDateTime_Result result in resultList)
-                    {
-                        transactions.Add(new Budget_Transactions
+                    List<TransactionsDatesView> transactionsView = context.TransactionsDatesViews
+                        .Where(trans => datetime == trans.Date).ToList();
+                    List<Budget_Transactions> budgetTransactionList = transactionsView
+                        .Select(trans => new Budget_Transactions()
                         {
-                            TransactionID = result.TransactionID,
-                            Amount = result.Amount,
-                            CreatedDate = result.CreatedDate,
-                            CategoryID = result.CategoryID,
-                            DateTime = result.DateTime,
-                            Description = result.Description
-                        });
+                            Amount = trans.Amount,
+                            CategoryID = trans.CategoryID,
+                            CreatedDate = trans.CreatedDate,
+                            DateTime = trans.DateTime,
+                            Description = trans.Description,
+                            ModifiedDate = trans.ModifiedDate,
+                            TransactionID = trans.TransactionID
+                        })
+                        .ToList();
+                    foreach (var trans in budgetTransactionList)
+                    {
+                        transactions.Add(trans);
                     }
                 }
             }
