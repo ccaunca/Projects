@@ -93,6 +93,7 @@ namespace Budget.ViewModels
                 if (transaction.HasUpdated)
                 {
                     CarloniusRepository.UpdateTransaction(TransactionConverter.ConvertToBudget_Transaction(transaction));
+                    CarloniusRepository.AddDateTimeLookup(transaction.DateTime);
                     transaction.HasUpdated = false;
                     ChangesMade = false;
                     date = transaction.DateTime;
