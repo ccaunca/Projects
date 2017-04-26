@@ -9,6 +9,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <c:AmountConverter x:Key="amountConverter"/>
+        <c:AmountToColorConverter x:Key="amountToColorConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -20,7 +21,14 @@
                   ItemsSource="{Binding Transactions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Binding="{Binding DateTime}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Amount" Binding="{Binding Amount, Converter={StaticResource amountConverter}}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Amount, Converter={StaticResource amountConverter}}" IsReadOnly="True">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="BorderBrush" Value="{Binding Amount, Converter={StaticResource amountToColorConverter}}"/>
+                            <Setter Property="BorderThickness" Value="2"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Category" Binding="{Binding Category}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Created Date" Binding="{Binding CreatedDate}" IsReadOnly="True"/>
@@ -36,7 +44,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Label FontWeight="ExtraBold" Grid.Column="0" Grid.Row="0" Content="Total:"/>
-            <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding AmountTotal, Converter={StaticResource amountConverter}}"></TextBox>
+            <TextBox BorderBrush="{Binding AmountTotal, Converter={StaticResource amountToColorConverter}}" BorderThickness="2" IsReadOnly="True"
+                     Grid.Column="0" Grid.Row="1" Text="{Binding AmountTotal, Converter={StaticResource amountConverter}}"></TextBox>
         </Grid>
     </Grid>
 </UserControl>

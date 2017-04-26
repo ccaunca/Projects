@@ -93,7 +93,7 @@ namespace Budget.ViewModels
             );
             GetAllCategories();
             var canAdd = this.WhenAnyValue(x => x.DescriptionText, x => x.TransactionAmount,
-                (description, amount) => !string.IsNullOrEmpty(description) && amount > 0);
+                (description, amount) => !string.IsNullOrEmpty(description) && amount != 0);
             AddCommand = ReactiveCommand.Create(() => AddTransaction(), canAdd);
             AddCommand.IsExecuting.ToProperty(this, x => x.IsAdding, out _isAdding);
             AddCategoryCommand = ReactiveCommand.Create(() => AddCategory());

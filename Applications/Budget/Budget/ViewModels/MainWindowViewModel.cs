@@ -3,9 +3,12 @@ using Budget.Helpers;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Reactive;
 using System.Windows.Controls;
+using WPFPieChart;
+using Xceed.Wpf.Toolkit;
 
 namespace Budget.ViewModels
 {
@@ -22,6 +25,7 @@ namespace Budget.ViewModels
         private AddUserControlViewModel _addUserControlViewModel;
         private EditUserControlViewModel _editUserControlViewModel;
         private ViewUserControlViewModel _viewUserControlViewModel;
+        private ObservableCollection<AssetClass> _classes;
         public bool IsViewMode
         {
             get { return _isViewMode; }
@@ -77,6 +81,11 @@ namespace Budget.ViewModels
             get { return _viewUserControlViewModel; }
             set { this.RaiseAndSetIfChanged(ref _viewUserControlViewModel, value); }
         }
+        public ObservableCollection<AssetClass> Classes
+        {
+            get { return _classes; }
+            set { this.RaiseAndSetIfChanged(ref _classes, value); }
+        }
         public IObservable<Nullable<DateTime>> SelectedDateObservable;
         public IObservable<IEnumerable<DateTime>> SelectedDatesObservable;
         private static MainWindowViewModel _instance;
@@ -104,8 +113,8 @@ namespace Budget.ViewModels
             SelectedDateObservable.Subscribe(EditUserControlViewModel.DateTimeObserver);
             tabSelection.Subscribe(updateRadioButton);
             SelectedDate = DateTimeHelper.PstNow();
+            Classes = new ObservableCollection<AssetClass>(AssetClass.ConstructTestData());
         }
-
         private void UpdateRadioButtonSelection(int tabIdx)
         {
             switch(tabIdx)
@@ -165,7 +174,6 @@ namespace Budget.ViewModels
                     SelectedTabIndex = 0;
                     break;
             }
-            
         }
         private void HandleError(CalendarModeEnum mode, string exceptionMessage)
         {

@@ -8,20 +8,44 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:uc="clr-namespace:Budget.UserControls"
         xmlns:e ="clr-namespace:Budget.Extensions"
+        xmlns:xc="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        xmlns:c="clr-namespace:ScottLogic.Controls.PieChart"
         mc:Ignorable="d"
         Title="Budget" Height="575" Width="600"
         Icon="Images\Purse.ico">
+    <Window.Resources>
+        <x:ArrayExtension Type="{x:Type Brush}" x:Key="brushes">
+            <SolidColorBrush Color="#9F15C3"/>
+            <SolidColorBrush Color="#FF8E01"/>
+            <SolidColorBrush Color="#339933"/>
+            <SolidColorBrush Color="#00AAFF"/>
+            <SolidColorBrush Color="#818183"/>
+            <SolidColorBrush Color="#000033"/>
+        </x:ArrayExtension>
+    </Window.Resources>
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Calendar Grid.Row="0" SelectionMode="{Binding SelectionMode}" SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Calendar Grid.Row="0" Grid.Column="0" SelectionMode="{Binding SelectionMode}" SelectedDate="{Binding SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       HorizontalAlignment="Center" VerticalAlignment="Top"
                       e:CalendarExtensions.SelectedDates="{Binding SelectedDates, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       e:CalendarExtensions.TrackCalendarSelectedDates="True"/>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="0" Grid.Column="1">
+                <c:PieChartLayout HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0"
+                              x:Name="piePlotter" PlottedProperty="Fund" Margin="10">
+                    <c:PieChartLayout.ColorSelector>
+                        <c:IndexedColourSelector Brushes="{StaticResource brushes}"/>
+                    </c:PieChartLayout.ColorSelector>
+                </c:PieChartLayout>
+            </Grid>
+            <Grid Grid.Row="1" Grid.ColumnSpan="2">
                 <TabControl SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                     <TabItem Header="View" >
                         <uc:ViewUserControl/>

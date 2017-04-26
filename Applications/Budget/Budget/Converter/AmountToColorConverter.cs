@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace Budget.Converter
 {
-    public class AmountConverter : IValueConverter
+    public class AmountToColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string rawAmount = value.ToString();
-            return "$" + rawAmount.Replace("-", string.Empty);
+            decimal amount = (decimal)value;
+            return amount == (decimal)0 ? Brushes.White :
+                amount < (decimal)0 ? Brushes.Red : Brushes.Green;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string dollarAmount = value.ToString();
-            return dollarAmount.Remove(0, 1);
+            throw new NotImplementedException();
         }
     }
 }
