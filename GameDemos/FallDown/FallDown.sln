@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FallDown.CSharp", "FallDown.CSharp.csproj", "{266F9AD3-43D1-4C6D-AC93-BC4A84BB55C9}"
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FallDown", "FallDown.csproj", "{D22B0B63-ABC3-F6A5-2E72-DAFBBDCCB2BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{266F9AD3-43D1-4C6D-AC93-BC4A84BB55C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{266F9AD3-43D1-4C6D-AC93-BC4A84BB55C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{266F9AD3-43D1-4C6D-AC93-BC4A84BB55C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{266F9AD3-43D1-4C6D-AC93-BC4A84BB55C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D22B0B63-ABC3-F6A5-2E72-DAFBBDCCB2BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D22B0B63-ABC3-F6A5-2E72-DAFBBDCCB2BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D22B0B63-ABC3-F6A5-2E72-DAFBBDCCB2BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D22B0B63-ABC3-F6A5-2E72-DAFBBDCCB2BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
