@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace FallDownDemo
 {
@@ -14,9 +12,6 @@ namespace FallDownDemo
         private const string highScoreKey = "HighScore";
         private const string highScoreNameKey = "HighScoreName";
         private int maxScores = 10;
-        private int leftMarginRank = 50;
-        private int leftMarginScore = 165;
-        private int leftMarginInitials = 300;
         private int topMargin = 60;
         private int topMarginSpacingFactor = 30;
         private int titleHeight = 85;
@@ -35,10 +30,7 @@ namespace FallDownDemo
         private string initialsTitle = "Initials";
         private string buttonHighScoreOKText = "OK";
         private bool allowReset = false;
-        private string customUrl = "http://localhost:8438/LogUserScore.aspx";
-
         private bool highScoreWindow;
-
         private Rect boxRect;
         private Rect goButtonRect;
         private Rect highScoreButtonRect;
@@ -46,16 +38,8 @@ namespace FallDownDemo
         private Rect rankRect;
         private Rect scoreRect;
         private Rect initialsRect;
-        //private Rect highScoreTextBoxRect;
-        //private Rect highScoreNameRect;
         private Rect highScoreOKButtonRect;
         private Rect resetHighScoresButtonRect;
-        // Use this for initialization
-        void Start()
-        {
-            SetRects();
-        }
-
         void SetRects()
         {
             boxRect = new Rect((CameraManager.ScreenWidth() / 2) - 75, 15F, 150, CameraManager.ScreenHeight() - 4 * screenMargin);
@@ -69,15 +53,9 @@ namespace FallDownDemo
             if (allowReset)
                 resetHighScoresButtonRect = new Rect((CameraManager.ScreenWidth() / 2) - (buttonWidth - 150), screenMargin + buttonMargin + 2 * buttonHeight, buttonWidth, buttonHeight);
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-            SetRects();
-        }
-
         void OnGUI()
         {
+            SetRects();
             GUI.Box(boxRect, boxTitle, guiBoxStyle);
             if (GUI.Button(goButtonRect, startButtonTitle, guiButtonStyle))
             {
@@ -98,7 +76,6 @@ namespace FallDownDemo
                     ClearAllScores();
             }
         }
-
         void CheckPlayerPrefs()
         {
             string hsNameKey;
@@ -113,22 +90,12 @@ namespace FallDownDemo
                     PlayerPrefs.SetString(hsNameKey, "***");
             }
         }
-
         void CreateHighScoreWindow(int windowId)
         {
             int j = maxScores;
             GUI.Label(rankRect, rankTitle, guiTopScoresStyle);
             GUI.Label(scoreRect, scoreTitle, guiTopScoresStyle);
             GUI.Label(initialsRect, initialsTitle, guiTopScoresStyle);
-            //GUI.Label(new Rect(leftMarginRank, topMargin, buttonWidth, titleHeight), rankTitle, guiTopScoresStyle);
-            //GUI.Label(new Rect(leftMarginScore, topMargin, buttonWidth, titleHeight), scoreTitle, guiTopScoresStyle);
-            //GUI.Label(new Rect(leftMarginInitials, topMargin, buttonWidth, titleHeight), initialsTitle, guiTopScoresStyle);
-            string initials = "XXX";
-            int score = 999;
-            Messenger messenger = new Messenger(customUrl);
-            Message message = new Message(new List<Field> { new Field("Score", score.ToString()), new Field("Initials", initials) });
-            messenger.SendMessage(message);
-            // Display top maxScores
             for (int i = 1; i <= maxScores; i++)
             {
                 GUI.Label(new Rect(rankRect.x, (topMarginSpacingFactor * i) + topMargin, buttonWidth, highScoreHeightFactor * i), "#" + i, guiTopScoresStyle);
@@ -141,21 +108,6 @@ namespace FallDownDemo
                 highScoreWindow = false;
             }
         }
-
-        IEnumerator WaitForRequest(WWW www)
-        {
-            yield return www;
-
-            if (www.error == null)
-            {
-                Debug.Log(www.text);
-            }
-            else
-            {
-                Debug.Log("WWW Error: " + www.error);
-            }
-        }
-
         void ClearAllScores()
         {
             for (int x = 1; x <= maxScores; x++)
@@ -167,17 +119,14 @@ namespace FallDownDemo
                 }
             }
         }
-
         private string GetHighScoreKeyText(int hsk)
         {
             return highScoreKey + hsk.ToString();
         }
-
         private string GetHighScoreNameKeyText(int hsnk)
         {
             return highScoreNameKey + hsnk.ToString();
         }
-
         private bool DoesKeyExist(string key)
         {
             return PlayerPrefs.HasKey(key);

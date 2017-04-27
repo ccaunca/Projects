@@ -39,7 +39,7 @@ namespace FallDownDemo
 		private Rect mainWindow;
 		private Rect gameOverTextRect;
 
-        private Rect newHighScoreRect;// = new Rect((Screen.width/2)-270, (Screen.height/2)-280, 50, 20);
+        private Rect newHighScoreRect = new Rect((Screen.width/2)-270, (Screen.height/2)-280, 50, 20);
 		private Rect newHighPlayerScoreRect = new Rect((Screen.width/2)-205, (Screen.height/2)-245, 50, 20);
 		private Rect enterNameRect = new Rect((Screen.width/2)-325, (Screen.height/2)-170, 50, 20);
 		private Rect nameEntryRect = new Rect((Screen.width/2)-210, (Screen.height/2)-120, 50, 20);
@@ -62,7 +62,6 @@ namespace FallDownDemo
 			addedHighScore = false;
 			playerScore = 0;
             highScores = new List<HighScore>();
-            
 		}
         void CreateRects()
         {
@@ -72,7 +71,7 @@ namespace FallDownDemo
             float mainWindowHeight = Screen.height - 2 * mainWindowTop;
             mainWindow = new Rect(mainWindowLeft, mainWindowTop, mainWindowWidth, mainWindowHeight);
             gameOverTextRect = new Rect((Screen.width / 2)- 65, (Screen.height / 3) - 25, 150, 250);
-            newHighScoreRect = new Rect((CameraManager.ScreenWidth() / 2), (Screen.height / 2) - 280, 50, 20);
+            //newHighScoreRect = new Rect((CameraManager.ScreenWidth() / 2), (Screen.height / 2) - 280, 50, 20);
             newHighPlayerScoreRect = new Rect((Screen.width / 2) - 205, (Screen.height / 2) - 245, 50, 20);
             enterNameRect = new Rect((Screen.width / 2) - 325, (Screen.height / 2) - 170, 50, 20);
             nameEntryRect = new Rect((Screen.width / 2) - 210, (Screen.height / 2) - 120, 50, 20);

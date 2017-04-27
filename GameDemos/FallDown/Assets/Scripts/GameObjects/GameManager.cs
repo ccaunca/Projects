@@ -6,7 +6,6 @@ namespace FallDownDemo
 	public class GameManager : MonoBehaviour {
 		private bool isDown = true;
         private CameraManager cameraManager;
-        private ScoreManager scoreManager;
         private GameObject leftPlank;
         private GameObject rightPlank;
 		// Use this for initialization
@@ -16,7 +15,6 @@ namespace FallDownDemo
             rightPlank = GameObject.Find("RightPlank");
             // initialize managers
             cameraManager = CameraManager.GetInstance();
-            scoreManager = ScoreManager.GetInstance();
         }
 	
 		int GetDirection()
