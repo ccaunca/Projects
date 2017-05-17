@@ -13,9 +13,14 @@ namespace HiScoreWcfService
             return CarloniusRepository.GetScores(Convert.ToInt32(n));
         }
 
-        public void InsertHiScore(string hiScore)
+        public bool InsertHiScore(string hiScore, string initials)
         {
-            //CarloniusRepository.InsertHiScore(hiScore);
+            return CarloniusRepository.InsertHiScore(
+                new FallDown_HiScore {
+                    DateTime = DateTime.UtcNow.AddHours(-7),
+                    HiScoreName = initials,
+                    HiScoreValue = Convert.ToInt32(hiScore)}
+            );
         }
     }
 }

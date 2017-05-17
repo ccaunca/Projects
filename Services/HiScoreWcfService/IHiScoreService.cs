@@ -14,7 +14,7 @@ namespace HiScoreWcfService
         IEnumerable<FallDown_GetNHiScores_Result> GetNScores(string n);
 
         [OperationContract]
-        [WebInvoke(Method = "PUT", UriTemplate = "/hiscore/{hiScore}")]
-        void InsertHiScore(string hiScore);
+        [WebGet(UriTemplate = "/hiscore/{hiScore}/name/{name}")]
+        bool InsertHiScore(string hiScore, string name);
     }
 }

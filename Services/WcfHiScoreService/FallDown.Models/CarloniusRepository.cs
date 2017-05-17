@@ -8,20 +8,24 @@ namespace FallDown.Models
 {
     public class CarloniusRepository
     {
-        public static void InsertHiScore(FallDown_HiScore hiScore)
+        public static bool InsertHiScore(FallDown_HiScore hiScore)
         {
+            bool result = false;
             try
             {
                 using (var context = new CarloniusEntities())
                 {
                     context.FallDown_HiScore.Add(hiScore);
                     context.SaveChanges();
+                    result = true;
                 }
             }
             catch (Exception ex)
             {
                 HandleException(ex, "InsertHiScore");
+                result = false;
             }
+            return result;
         }
 
         public static IEnumerable<FallDown_GetNHiScores_Result> GetScores(int n)
