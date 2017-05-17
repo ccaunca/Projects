@@ -1,51 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FallDown.Models
 {
     public class CarloniusRepository
     {
-        public static void InsertHiScore(int score, char[] name)
+        public static void InsertHiScore(FallDown_HiScore hiScore)
         {
             try
             {
-                using (var entity = new CarloniusEntities())
+                using (var context = new CarloniusEntities())
                 {
-                    entity.FallDown_HiScore.Add(
-                        new FallDown_HiScore
-                        {
-                            DateTime = DateTime.Now,
-                            HiScoreValue = score,
-
-                        });
-                    entity.SaveChanges();
+                    context.FallDown_HiScore.Add(hiScore);
+                    context.SaveChanges();
                 }
             }
             catch (Exception ex)
             {
-
+                HandleException(ex, "InsertHiScore");
             }
         }
 
-        public static IEnumerable<FallDown_HiScore> GetScores(int n)
+        public static IEnumerable<FallDown_GetNHiScores_Result> GetScores(int n)
         {
-            List<FallDown_HiScore> scores = new List<FallDown_HiScore>();
+            List<FallDown_GetNHiScores_Result> hiScores = new List<FallDown_GetNHiScores_Result>();
             try
             {
-                using (var entity = new CarloniusEntities())
+                using (var context = new CarloniusEntities())
                 {
-                    //entity.FallDown_HiScore
+                    ObjectResult<FallDown_GetNHiScores_Result> resultSet = context.FallDown_GetNHiScores(n);
+                    List<FallDown_GetNHiScores_Result> resultList = (from scores in resultSet select scores).ToList();
+                    foreach(FallDown_GetNHiScores_Result result in resultList)
+                    {
+                        hiScores.Add(result);
+                    }
                 }
                 
             }
             catch(Exception ex)
             {
-
+                HandleException(ex, "GetScores");
             }
-            return scores;
+            return hiScores;
+        }
+        /// <summary>
+        /// Handle exception and print debugMessage
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <param name="debugMessage"></param>
+        private static void HandleException(Exception ex, string debugMessage)
+        {
+            Debug.WriteLine("CarloniusRepository Exception occurred attempting to {0} : {1}", debugMessage, ex.Message);
+            throw ex;
         }
     }
 }

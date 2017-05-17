@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAA8NylcAACkOxymlGLb4G5gAAAAACAAAAAAAQZgAAAAEAACAAAAD5moaluFynd6HssVNG/f0GVa6qTEBWEue08LkF+MkOfQAAAAAOgAAAAAIAACAAAABpiwKnhJad92fxAwOkCxRqzsNbDIA5KniJ4gxd3V+NUyAAAACqku6+TpNu6XprxTzuWlet0NyB2je26u6jqKzd7gPddEAAAADcZwG7u2ncbAT7FZ1XYqavEO5l7RXwOb0r/JnF734cbVW19piTmBKAHMk8Ielv7O7NXN6BzPslDe++xZn/7PQc</EncryptedPassword>
+    <_PublishTargetUrl>ftp://184.168.193.49/FallDownHiScore</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>04/26/2017 23:10:55</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>04/26/2017 23:10:55</publishTime>
+    </File>
+    <File Include="bin/FallDown.Models.dll">
+      <publishTime>05/03/2017 18:46:55</publishTime>
+    </File>
+    <File Include="bin/FallDown.Models.dll.config">
+      <publishTime>05/02/2017 21:08:00</publishTime>
+    </File>
+    <File Include="bin/HiScoreWcfService.dll">
+      <publishTime>05/03/2017 20:26:42</publishTime>
+    </File>
+    <File Include="HiScoreService.svc">
+      <publishTime>05/02/2017 21:19:40</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>05/02/2017 22:20:54</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>05/03/2017 20:26:47</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

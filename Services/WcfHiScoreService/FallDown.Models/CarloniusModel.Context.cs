@@ -12,6 +12,8 @@ namespace FallDown.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class CarloniusEntities : DbContext
     {
@@ -26,5 +28,14 @@ namespace FallDown.Models
         }
     
         public virtual DbSet<FallDown_HiScore> FallDown_HiScore { get; set; }
+    
+        public virtual ObjectResult<FallDown_GetNHiScores_Result> FallDown_GetNHiScores(Nullable<int> n)
+        {
+            var nParameter = n.HasValue ?
+                new ObjectParameter("n", n) :
+                new ObjectParameter("n", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FallDown_GetNHiScores_Result>("FallDown_GetNHiScores", nParameter);
+        }
     }
 }

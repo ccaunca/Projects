@@ -65,6 +65,9 @@
       <DependentUpon>CarloniusModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="CarloniusRepository.cs" />
+    <Compile Include="FallDown_GetNHiScores_Result.cs">
+      <DependentUpon>CarloniusModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="FallDown_HiScore.cs">
       <DependentUpon>CarloniusModel.tt</DependentUpon>
     </Compile>

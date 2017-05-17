@@ -14,6 +14,9 @@
           <Property Name="HiScoreName" Type="varchar" MaxLength="3" Nullable="false" />
           <Property Name="DateTime" Type="datetime" Nullable="false" />
         </EntityType>
+        <Function Name="FallDown_GetNHiScores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="FallDown.GetNHiScores">
+          <Parameter Name="n" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="CarloniusModelStoreContainer">
           <EntitySet Name="FallDown_HiScore" EntityType="Self.FallDown_HiScore" Schema="dbo" Table="FallDown.HiScore" store:Type="Tables" />
         </EntityContainer>
@@ -32,7 +35,15 @@
         </EntityType>
         <EntityContainer Name="CarloniusEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="FallDown_HiScore" EntityType="Self.FallDown_HiScore" />
+          <FunctionImport Name="FallDown_GetNHiScores" ReturnType="Collection(CarloniusModel.FallDown_GetNHiScores_Result)">
+            <Parameter Name="n" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="FallDown_GetNHiScores_Result">
+          <Property Type="Int32" Name="HiScoreValue" Nullable="false" />
+          <Property Type="String" Name="HiScoreName" Nullable="false" MaxLength="3" />
+          <Property Type="DateTime" Name="DateTime" Nullable="false" Precision="23" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -49,6 +60,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="FallDown_GetNHiScores" FunctionName="CarloniusModel.Store.FallDown_GetNHiScores">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CarloniusModel.FallDown_GetNHiScores_Result">
+                <ScalarProperty Name="HiScoreValue" ColumnName="HiScoreValue" />
+                <ScalarProperty Name="HiScoreName" ColumnName="HiScoreName" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
