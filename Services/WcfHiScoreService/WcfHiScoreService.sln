@@ -3,11 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApp", "TestConsoleApp\TestConsoleApp.csproj", "{52158E04-6B6D-40BB-9B62-AAFE304B1563}"
-	ProjectSection(ProjectDependencies) = postProject
-		{CD707AD3-0889-4E0C-81E2-F7988C9DC221} = {CD707AD3-0889-4E0C-81E2-F7988C9DC221}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FallDown.Models", "FallDown.Models\FallDown.Models.csproj", "{F27E6543-BDC6-434D-8E6C-62325D34B515}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiScoreWcfService", "..\HiScoreWcfService\HiScoreWcfService.csproj", "{CD707AD3-0889-4E0C-81E2-F7988C9DC221}"
@@ -18,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{52158E04-6B6D-40BB-9B62-AAFE304B1563}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52158E04-6B6D-40BB-9B62-AAFE304B1563}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{52158E04-6B6D-40BB-9B62-AAFE304B1563}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{52158E04-6B6D-40BB-9B62-AAFE304B1563}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F27E6543-BDC6-434D-8E6C-62325D34B515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F27E6543-BDC6-434D-8E6C-62325D34B515}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F27E6543-BDC6-434D-8E6C-62325D34B515}.Release|Any CPU.ActiveCfg = Release|Any CPU
